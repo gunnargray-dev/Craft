@@ -48,17 +48,21 @@ These apply to every file, every component, every commit. No exceptions.
 - 44pt minimum touch targets (extend hit area with `contentShape` if visual element is smaller).
 
 ### Typography
-- Use system text styles. Maximum 2 font weights per view.
-- `.monospacedDigit()` on any number that updates dynamically.
+- Use `PPFont.*` tokens for all text (`PerplexityTypography.swift`). Never use raw `Font.system()`.
+- Four font families: PPLX Sans (UI), PPLX Serif (titles/articles), PPLX Mono (code), GT Canon (display/hero).
+- Apply line height with `.ppLineHeight()` and tracking with `.ppTracking()`.
+- Maximum 2 font weights per view. `.monospacedDigit()` on dynamic numbers.
 - Support Dynamic Type — test at AX5.
 
 ### Color & Accessibility
-- Semantic system colors only (`label`, `secondaryLabel`, `systemBackground`, etc.).
-- Support both light and dark mode.
+- Use Perplexity semantic tokens (`Color.fgPrimary`, `Color.bgBase`, `Color.accentFgPrimary`, etc.) from `PerplexityColors.swift`.
+- Primitives (`Color.teal500`, `Color.gray700`, etc.) available but prefer semantic tokens in components.
+- All semantic colors support light/dark mode automatically via `Color.dynamicColor()`.
 - Never rely on color alone for state — add icons, shapes, or text.
 - WCAG AA contrast minimums: 4.5:1 body text, 3:1 large/bold.
 
 ### Code Patterns
 - Use `DesignTokens.swift` for all spacing, shadows, springs, and radii.
+- Use `Dimensions.*` spacing tokens (`spacing3xs` through `spacing3xl`, 2–32pt).
 - Use `CraftButton` for all buttons. Use `.pressEffect()` for custom tappable elements.
 - Use `.enterAnimation(delay:)` for staggered reveals on new screens.

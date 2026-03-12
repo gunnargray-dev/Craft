@@ -2,17 +2,21 @@
 
 ## Spacing Scale
 
-Use a 4pt base grid. All spacing values are multiples of 4.
+Use a 4pt base grid. All spacing values are multiples of 4 (except 3xs). Tokens defined in the design-tokens repo (`Dimensions.swift`) and mirrored in `DesignTokens.swift`.
 
-| Token | Value | Use |
-|---|---|---|
-| space-xs | 4pt | Icon-to-label gap, tight inline elements |
-| space-sm | 8pt | Between related items in a group, inline padding |
-| space-md | 12pt | Between groups, cell internal padding, control spacing |
-| space-lg | 16pt | Section margins, card padding, system horizontal margin |
-| space-xl | 24pt | Between major sections, bezel-free control padding |
-| space-2xl | 32pt | Screen top/bottom padding, breathing room between unrelated sections |
-| space-3xl | 48pt | Hero spacing, dramatic separation |
+| Token | Swift Constant | Value | Use |
+|---|---|---|---|
+| spacing-3xs | `Dimensions.spacing3xs` | 2pt | Hairline gaps, icon optical adjustment |
+| spacing-2xs | `Dimensions.spacing2xs` | 4pt | Icon-to-label gap, tight inline elements |
+| spacing-xs | `Dimensions.spacingXs` | 8pt | Between related items in a group, inline padding |
+| spacing-sm | `Dimensions.spacingSm` | 12pt | Between groups, cell internal padding, control spacing |
+| spacing-md | `Dimensions.spacingMd` | 16pt | Section margins, card padding, system horizontal margin |
+| spacing-lg | `Dimensions.spacingLg` | 20pt | Between sections, medium breathing room |
+| spacing-xl | `Dimensions.spacingXl` | 24pt | Between major sections, bezel-free control padding |
+| spacing-2xl | `Dimensions.spacing2xl` | 28pt | Large section gaps |
+| spacing-3xl | `Dimensions.spacing3xl` | 32pt | Screen top/bottom padding, breathing room between unrelated sections |
+
+For hero-level spacing (48pt+), use multiples of `spacing3xl`.
 
 ### Rules
 - **Consistent internal padding:** Cards use 16pt. Cells use 12-16pt. Don't vary within the same component type.

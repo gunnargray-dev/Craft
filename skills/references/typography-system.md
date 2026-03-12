@@ -1,8 +1,73 @@
 # Typography System
 
-## Type Scale (iOS/iPadOS — SF Pro)
+## Font Families
 
-Based on Apple's Dynamic Type system. These are the default (Large) size values.
+Craft uses four custom Perplexity typefaces, bundled as variable fonts in `Craft/Resources/Fonts/`:
+
+| Family | File | Swift Constant | Use |
+|---|---|---|---|
+| **PPLX Sans** | `PPLXSansBetav0VF.ttf` | `PPFontFamily.sans` | Primary UI text — body, captions, sections |
+| **PPLX Serif** | `PPLXSerifBetav0VF.ttf` | `PPFontFamily.serif` | Titles, article body (serif mode) |
+| **PPLX Mono** | `PPLXMonoBetav0VF.ttf` | `PPFontFamily.mono` | Code blocks, inline code |
+| **GT Canon** | `GT-Canon-VF.ttf` | `PPFontFamily.condensed` | Headlines, display, hero text |
+
+Italic variants: `PPLXSerifBetav0VF-Italic.ttf`, `GT-Canon-Italic-VF.ttf`.
+
+Fonts are registered in `Craft/Info.plist` via `UIAppFonts`. Use `PPFont.*` for all text — **never use raw `Font.system()`**.
+
+## Perplexity Type Scale
+
+All tokens defined in `PerplexityTypography.swift`. Use `PPFont.*` in SwiftUI code.
+
+### UI Text
+
+| Token | Font | Size | Line Height | Tracking | Weight | Use |
+|---|---|---|---|---|---|---|
+| `PPFont.caption` | PPLX Sans | 12pt | 16pt | -0.54 | Regular (400) | Labels, metadata, timestamps |
+| `PPFont.captionStrong` | PPLX Sans | 12pt | 16pt | -0.54 | Semibold (600) | Emphasized labels, badge text |
+| `PPFont.codeSm` | PPLX Mono | 12pt | 16pt | -0.24 | Regular (400) | Inline code, small code snippets |
+| `PPFont.codeMd` | PPLX Mono | 14pt | 20pt | -0.56 | Regular (400) | Code blocks, terminal output |
+| `PPFont.bodyMd` | PPLX Sans | 16pt | 24pt | -0.72 | Regular (400) | Secondary body text, descriptions |
+| `PPFont.bodyMdStrong` | PPLX Sans | 16pt | 24pt | -0.72 | Semibold (600) | Emphasized secondary body |
+| `PPFont.bodyLg` | PPLX Sans | 17pt | 26pt | -0.72 | Regular (400) | Primary body text, paragraphs |
+| `PPFont.bodyLgStrong` | PPLX Sans | 17pt | 26pt | -0.72 | Semibold (600) | Emphasized primary body, cell titles |
+
+### UI Headings
+
+| Token | Font | Size | Line Height | Tracking | Weight | Use |
+|---|---|---|---|---|---|---|
+| `PPFont.section` | PPLX Sans | 18pt | 26pt | -0.81 | Semibold (600) | Section headers within a screen |
+| `PPFont.title` | PPLX Serif | 20pt | 28pt | -0.40 | Semibold (600) | Screen titles, card titles |
+| `PPFont.headline` | GT Canon | 24pt | 32pt | -0.48 | Medium (500) | Major headings, feature titles |
+| `PPFont.display` | GT Canon | 38pt | 48pt | -0.76 | Medium (500) | Large display text, marketing |
+| `PPFont.hero` | GT Canon | 46pt | 56pt | -0.92 | Medium (500) | Hero text, splash screens |
+
+### Article Text
+
+| Token | Font | Size | Line Height | Tracking | Weight | Use |
+|---|---|---|---|---|---|---|
+| `PPFont.articleBodySerif` | PPLX Serif | 17pt | 26pt | -0.32 | Medium (500) | Long-form reading (serif mode) |
+| `PPFont.articleBodySans` | PPLX Sans | 17pt | 26pt | -0.24 | Regular (400) | Long-form reading (sans mode) |
+| `PPFont.articleCode` | PPLX Mono | 14pt | 20pt | -0.28 | Regular (400) | Code within articles |
+
+### Article Headings
+
+| Token | Font | Size | Line Height | Tracking | Weight | Use |
+|---|---|---|---|---|---|---|
+| `PPFont.articleSectionSerif` | PPLX Serif | 19pt | 28pt | -0.36 | Semibold (600) | Article section headers (serif) |
+| `PPFont.articleSectionSans` | PPLX Sans | 19pt | 28pt | -0.54 | Semibold (600) | Article section headers (sans) |
+| `PPFont.articleTitleSerif` | PPLX Serif | 21pt | 30pt | -0.36 | Semibold (600) | Article titles (serif) |
+| `PPFont.articleTitleSans` | PPLX Sans | 21pt | 30pt | 0.00 | Semibold (600) | Article titles (sans) |
+| `PPFont.articleHeadlineSerif` | GT Canon | 24pt | 32pt | -0.48 | Medium (500) | Article headlines (serif) |
+| `PPFont.articleHeadlineSans` | PPLX Sans | 24pt | 32pt | 0.00 | Semibold (600) | Article headlines (sans) |
+
+### Dark Mode Font Weights
+
+Variable fonts support light/dark weight variants via `DynamicFontWeight`. The design-tokens repo defines per-token weight names for light and dark modes (e.g., "S Regular" vs "Dark S Regular" for PPLX Sans). These are available through `PPTypographyToken` specs.
+
+## Apple Type Scale Reference (iOS/iPadOS — SF Pro)
+
+For reference when comparing to system styles. These are the default (Large) size values.
 
 | Style | Weight | Size | Leading | Emphasized | Use |
 |---|---|---|---|---|---|
@@ -20,63 +85,79 @@ Based on Apple's Dynamic Type system. These are the default (Large) size values.
 
 ## Decision Rules
 
-### When to Use Each Style
+### When to Use Each PPFont Style
 
-**Large Title / Title 1:** Top of scrollable views. One per screen. Use Large Title for primary screens, Title 1 for secondary screens.
+**`hero` / `display`** (GT Canon, 46pt / 38pt): Splash screens, landing pages, marketing moments. One per screen maximum.
 
-**Title 2 / Title 3:** Section headers within a screen. Title 2 for major sections, Title 3 for subsections. Don't skip levels (don't go Large Title → Title 3).
+**`headline`** (GT Canon, 24pt): Major headings, feature titles. The bridge between display and content text.
 
-**Headline vs Body:** Same size (17pt), different weight. Use Headline for labels that need emphasis without increasing size. Use Body for readable paragraphs.
+**`title`** (PPLX Serif, 20pt): Screen titles, card titles. The go-to heading for most screens.
 
-**Callout / Subhead:** Smaller content text. Callout for descriptions that pair with titles. Subhead for metadata (date, author, category).
+**`section`** (PPLX Sans, 18pt): Section headers within a screen. Use to divide content into groups.
 
-**Footnote:** Helper text below inputs, timestamps, attributions. Smallest size for non-decorative content.
+**`bodyLg` vs `bodyMd`** (17pt vs 16pt): Use `bodyLg` for primary content text. Use `bodyMd` for secondary descriptions. Use `Strong` variants for emphasis — don't increase size.
 
-**Caption 1 / Caption 2:** Input labels, badge text, tab bar labels. Caption 2 is the absolute minimum — nothing smaller in production.
+**`caption` / `captionStrong`** (12pt): Labels, metadata, timestamps, badge text. The smallest production text. Nothing smaller.
+
+**`codeSm` / `codeMd`** (PPLX Mono, 12pt / 14pt): Code snippets and technical content only.
+
+**Article styles:** Use `articleBody*` for long-form reading. Choose serif or sans based on user preference. Article headings (`articleSection*`, `articleTitle*`, `articleHeadline*`) create hierarchy within articles.
 
 ### Weight Selection
 
-| Weight | When to Use |
-|---|---|
-| Regular | Body text, descriptions, any long-form reading |
-| Medium | De-emphasized labels that still need distinction from Regular |
-| Semibold | Headline labels, cell titles, nav bar titles, input labels |
-| Bold | Screen titles (Large Title, Title 1-2), strong emphasis |
-| Heavy | Never in standard UI. Reserve for marketing/editorial only |
-| Ultralight/Thin/Light | Never for functional text. Only decorative display if legible |
+The Perplexity type system uses three weights:
 
-**Rule:** Use maximum 2 weights per view. Usually Regular + Semibold, or Regular + Bold. Three weights = noisy hierarchy.
+| Weight | Value | When to Use |
+|---|---|---|
+| Regular (400) | `Font.Weight.regular` | Body text, captions, descriptions, long-form reading |
+| Medium (500) | `Font.Weight.medium` | GT Canon headings, article serif body |
+| Semibold (600) | `Font.Weight.semibold` | Strong variants, section headers, titles, emphasis |
+
+**Rule:** Use maximum 2 weights per view. Usually Regular + Semibold. The `PPFont` tokens already encode the correct weight — don't override with `.bold()` or `.fontWeight()`.
 
 ## Tracking (Letter Spacing)
 
-Apple's tracking values are applied automatically in running apps. In design tools (Figma, Sketch), apply manually:
+All Perplexity tokens include specific tracking values. Apply via `.ppTracking()` modifier using the values from `PPTypographyToken`.
 
-### Key Tracking Values (SF Pro)
+### Key Tracking Values (PPLX Fonts)
 
-| Size Range | Tracking Direction | Notes |
-|---|---|---|
-| 6-11pt | Positive (looser) | Small text needs more breathing room |
-| 12pt | Zero | Neutral point |
-| 13-20pt | Negative (tighter) | Body range tightens for readability |
-| 17pt (Body) | -0.43pt | Most common — memorize this one |
-| 21-23pt | Transitioning | Moving from tight back to neutral |
-| 24pt+ | Positive (looser) | Display sizes open up for elegance |
-| 34pt (Large Title) | +0.40pt | Titles need room to breathe |
+| Size | Token | Tracking | Notes |
+|---|---|---|---|
+| 12pt (caption) | `PPTypographyToken.uiTextCaptionNormal` | -0.54 | Tighter at small sizes for cohesion |
+| 14pt (code) | `PPTypographyToken.uiTextCodeMd` | -0.56 | Mono needs tighter tracking |
+| 16pt (bodyMd) | `PPTypographyToken.uiTextBodyMdNormal` | -0.72 | Standard body — memorize this |
+| 17pt (bodyLg) | `PPTypographyToken.uiTextBodyLgNormal` | -0.72 | Primary body text |
+| 18pt (section) | `PPTypographyToken.uiHeadingSection` | -0.81 | Section headers |
+| 20pt (title) | `PPTypographyToken.uiHeadingTitle` | -0.40 | Serif title — looser than sans |
+| 24pt (headline) | `PPTypographyToken.uiHeadingHeadline` | -0.48 | GT Canon headline |
+| 38pt (display) | `PPTypographyToken.uiHeadingDisplay` | -0.76 | Display text |
+| 46pt (hero) | `PPTypographyToken.uiHeadingHero` | -0.92 | Hero — tightest tracking |
 
-**Rule of thumb:** If you're designing in Figma at body size (17pt), apply -0.4 tracking. At title size (28pt+), apply +0.3 to +0.4.
+**Pattern:** PPLX fonts use negative tracking across all sizes. Tracking gets tighter (more negative) as size increases, opposite to SF Pro's behavior.
 
 ## Leading (Line Height)
 
-Apple's text styles encode specific leading values. Follow these ratios:
+All Perplexity tokens include explicit line height values. Apply via `.ppLineHeight(_:fontSize:)` modifier.
 
-### Leading Rules
+### Leading Values by Token
 
-- **Body text (multi-line):** ~1.29x font size (17pt → 22pt leading). This is the iOS default.
-- **Titles (1-2 lines):** ~1.2x font size. Tighter because titles rarely wrap.
-- **Caption/Footnote:** ~1.23-1.38x. Slightly more generous at small sizes for legibility.
+| Category | Size → Line Height | Ratio |
+|---|---|---|
+| Caption (12pt) | 12 → 16pt | 1.33x |
+| Code Sm (12pt) | 12 → 16pt | 1.33x |
+| Code Md (14pt) | 14 → 20pt | 1.43x |
+| Body Md (16pt) | 16 → 24pt | 1.50x |
+| Body Lg (17pt) | 17 → 26pt | 1.53x |
+| Section (18pt) | 18 → 26pt | 1.44x |
+| Title (20pt) | 20 → 28pt | 1.40x |
+| Headline (24pt) | 24 → 32pt | 1.33x |
+| Display (38pt) | 38 → 48pt | 1.26x |
+| Hero (46pt) | 46 → 56pt | 1.22x |
+
+**Pattern:** Ratio decreases as size increases — small text gets more generous line height for legibility, large text tightens for visual cohesion.
 
 ### When to Adjust
-- **Wide columns / long passages:** Increase leading by 2-4pt for comfortable reading. Content should feel spacious.
+- **Wide columns / long passages:** Increase leading by 2-4pt for comfortable reading.
 - **Tight layouts (cells, compact cards):** Decrease by 1-2pt. But never go below 1.15x font size.
 - **Three or more lines:** Never use tight leading. The eye loses its place.
 
@@ -146,17 +227,18 @@ Non-negotiable. Every text element must respond to the user's preferred text siz
 
 **Fix:** Use flexible containers. At `isAccessibilityCategory` sizes, switch horizontal layouts to vertical. Reduce column count.
 
-## Typeface Selection (Custom Fonts)
+## Custom Font Notes
 
-If using a custom typeface instead of SF Pro:
+The Perplexity font families are variable fonts (VF) bundled in the app. Key considerations:
 
-- **Must support Dynamic Type.** If the font can't scale, it can't ship.
-- **Must include Regular, Medium, Semibold, Bold at minimum.** Missing weights = broken emphasis hierarchy.
-- **Must support Bold Text accessibility setting.** The system adds weight — your font needs a heavier variant to shift to.
-- **Test at 11pt (minimum).** If the font is illegible at caption size, use SF Pro for small text and the custom font for titles only.
-- **Match SF Pro's metrics** for baseline alignment when mixing system and custom fonts.
+- **Variable font weights:** PPLX Sans/Serif and GT Canon support continuous weight axes. The design tokens define specific weight stops (400, 500, 600) — stick to these.
+- **Dark mode weight variants:** The design-tokens system defines separate named weight instances for light and dark modes (e.g., "S Regular" vs "Dark S Regular"). These are encoded in `DynamicFontWeight` in the generated `Typography.swift`.
+- **Minimum size:** 12pt (`PPFont.caption`). Nothing smaller in production.
+- **Mixing with system fonts:** Avoid mixing PPLX fonts with SF Pro in the same view. If you must use system fonts (e.g., for system controls), ensure baseline alignment.
+- **Font registration:** All fonts are registered in `Craft/Info.plist` under `UIAppFonts`. If a font doesn't render, verify the file is in the bundle resources.
 
-### Safe Pairing Pattern
-- Custom font for: Large Title, Title 1, Title 2 (brand expression)
-- SF Pro for: everything else (optimized for legibility at small sizes)
-- Never use more than 2 typeface families total.
+### Font Family Roles
+- **PPLX Sans:** The workhorse. All UI text, body, captions, sections.
+- **PPLX Serif:** Expressive. Titles, article body (serif mode), article headings.
+- **PPLX Mono:** Technical. Code blocks, inline code, terminal output.
+- **GT Canon:** Display. Headlines, display text, hero moments. Condensed/narrow — creates visual drama.
