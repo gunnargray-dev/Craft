@@ -38,6 +38,15 @@
 		A1B2C3D4E5F600010000D1FF /* ChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F600010000D2FF /* ChecklistView.swift */; };
 		A1B2C3D4E5F600010000E1AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F600010000E2AA /* Assets.xcassets */; };
 		A1B2C3D4E5F600010000E1BB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F600010000E2BB /* Preview Assets.xcassets */; };
+		A1B2C3D4E5F60001000F01AA /* PlatformImports.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60001000F02AA /* PlatformImports.swift */; };
+		A1B2C3D4E5F60001000F01BB /* PerplexityColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60001000F02BB /* PerplexityColors.swift */; };
+		A1B2C3D4E5F60001000F01CC /* PerplexityTypography.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60001000F02CC /* PerplexityTypography.swift */; };
+		F1A2B3C4D5E60001 /* PPLXSansBetav0VF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E60011 /* PPLXSansBetav0VF.ttf */; };
+		F1A2B3C4D5E60002 /* PPLXSerifBetav0VF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E60012 /* PPLXSerifBetav0VF.ttf */; };
+		F1A2B3C4D5E60003 /* PPLXSerifBetav0VF-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E60013 /* PPLXSerifBetav0VF-Italic.ttf */; };
+		F1A2B3C4D5E60004 /* PPLXMonoBetav0VF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E60014 /* PPLXMonoBetav0VF.ttf */; };
+		F1A2B3C4D5E60005 /* GT-Canon-VF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E60015 /* GT-Canon-VF.ttf */; };
+		F1A2B3C4D5E60006 /* GT-Canon-Italic-VF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F1A2B3C4D5E60016 /* GT-Canon-Italic-VF.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +82,15 @@
 		A1B2C3D4E5F600010000D2FF /* ChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistView.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F600010000E2AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1B2C3D4E5F600010000E2BB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A1B2C3D4E5F60001000F02AA /* PlatformImports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformImports.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60001000F02BB /* PerplexityColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerplexityColors.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60001000F02CC /* PerplexityTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerplexityTypography.swift; sourceTree = "<group>"; };
+		F1A2B3C4D5E60011 /* PPLXSansBetav0VF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PPLXSansBetav0VF.ttf; sourceTree = "<group>"; };
+		F1A2B3C4D5E60012 /* PPLXSerifBetav0VF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PPLXSerifBetav0VF.ttf; sourceTree = "<group>"; };
+		F1A2B3C4D5E60013 /* PPLXSerifBetav0VF-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PPLXSerifBetav0VF-Italic.ttf"; sourceTree = "<group>"; };
+		F1A2B3C4D5E60014 /* PPLXMonoBetav0VF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PPLXMonoBetav0VF.ttf; sourceTree = "<group>"; };
+		F1A2B3C4D5E60015 /* GT-Canon-VF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GT-Canon-VF.ttf"; sourceTree = "<group>"; };
+		F1A2B3C4D5E60016 /* GT-Canon-Italic-VF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GT-Canon-Italic-VF.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +131,7 @@
 				A1B2C3D4E5F6000100008040 /* Motion */,
 				A1B2C3D4E5F6000100008050 /* Audit */,
 				A1B2C3D4E5F600010000E2AA /* Assets.xcassets */,
+				F1A2B3C4D5E60020 /* Resources */,
 				A1B2C3D4E5F6000100008060 /* Preview Content */,
 			);
 			path = Craft;
@@ -121,6 +140,9 @@
 		A1B2C3D4E5F6000100008010 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				A1B2C3D4E5F60001000F02AA /* PlatformImports.swift */,
+				A1B2C3D4E5F60001000F02BB /* PerplexityColors.swift */,
+				A1B2C3D4E5F60001000F02CC /* PerplexityTypography.swift */,
 				A1B2C3D4E5F60001000002CC /* DesignTokens.swift */,
 				A1B2C3D4E5F60001000002DD /* CraftButton.swift */,
 			);
@@ -188,6 +210,27 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		F1A2B3C4D5E60020 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F1A2B3C4D5E60021 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F1A2B3C4D5E60021 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F1A2B3C4D5E60011 /* PPLXSansBetav0VF.ttf */,
+				F1A2B3C4D5E60012 /* PPLXSerifBetav0VF.ttf */,
+				F1A2B3C4D5E60013 /* PPLXSerifBetav0VF-Italic.ttf */,
+				F1A2B3C4D5E60014 /* PPLXMonoBetav0VF.ttf */,
+				F1A2B3C4D5E60015 /* GT-Canon-VF.ttf */,
+				F1A2B3C4D5E60016 /* GT-Canon-Italic-VF.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -249,6 +292,12 @@
 			files = (
 				A1B2C3D4E5F600010000E1AA /* Assets.xcassets in Resources */,
 				A1B2C3D4E5F600010000E1BB /* Preview Assets.xcassets in Resources */,
+				F1A2B3C4D5E60001 /* PPLXSansBetav0VF.ttf in Resources */,
+				F1A2B3C4D5E60002 /* PPLXSerifBetav0VF.ttf in Resources */,
+				F1A2B3C4D5E60003 /* PPLXSerifBetav0VF-Italic.ttf in Resources */,
+				F1A2B3C4D5E60004 /* PPLXMonoBetav0VF.ttf in Resources */,
+				F1A2B3C4D5E60005 /* GT-Canon-VF.ttf in Resources */,
+				F1A2B3C4D5E60006 /* GT-Canon-Italic-VF.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +337,9 @@
 				A1B2C3D4E5F600010000D1DD /* ContrastCheckerView.swift in Sources */,
 				A1B2C3D4E5F600010000D1EE /* SizeClassView.swift in Sources */,
 				A1B2C3D4E5F600010000D1FF /* ChecklistView.swift in Sources */,
+				A1B2C3D4E5F60001000F01AA /* PlatformImports.swift in Sources */,
+				A1B2C3D4E5F60001000F01BB /* PerplexityColors.swift in Sources */,
+				A1B2C3D4E5F60001000F01CC /* PerplexityTypography.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +476,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Craft/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -456,6 +509,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Craft/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -14,12 +14,12 @@ struct SharedElementView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let items: [SharedElementItem] = [
-        SharedElementItem(title: "Photos", subtitle: "Capture memories in stunning detail", icon: "photo.fill", color: .blue),
-        SharedElementItem(title: "Music", subtitle: "Listen to millions of songs anywhere", icon: "music.note", color: .pink),
-        SharedElementItem(title: "Weather", subtitle: "Forecasts and conditions at a glance", icon: "cloud.sun.fill", color: .orange),
-        SharedElementItem(title: "Maps", subtitle: "Navigate the world around you", icon: "map.fill", color: .green),
-        SharedElementItem(title: "Notes", subtitle: "Quick thoughts and detailed documents", icon: "note.text", color: .yellow),
-        SharedElementItem(title: "Health", subtitle: "Track your wellness and activity", icon: "heart.fill", color: .red),
+        SharedElementItem(title: "Photos", subtitle: "Capture memories in stunning detail", icon: "photo.fill", color: Color.blue600),
+        SharedElementItem(title: "Music", subtitle: "Listen to millions of songs anywhere", icon: "music.note", color: Color.pink600),
+        SharedElementItem(title: "Weather", subtitle: "Forecasts and conditions at a glance", icon: "cloud.sun.fill", color: Color.orange600),
+        SharedElementItem(title: "Maps", subtitle: "Navigate the world around you", icon: "map.fill", color: Color.green600),
+        SharedElementItem(title: "Notes", subtitle: "Quick thoughts and detailed documents", icon: "note.text", color: Color.yellow600),
+        SharedElementItem(title: "Health", subtitle: "Track your wellness and activity", icon: "heart.fill", color: Color.red600),
     ]
 
     private let gridColumns = [
@@ -40,6 +40,7 @@ struct SharedElementView: View {
                 .padding(.horizontal, Spacing.systemMargin)
                 .padding(.vertical, Spacing.md)
             }
+            .background(Color.bgBase)
             .opacity(selectedItem == nil ? 1 : 0)
             .navigationTitle("Shared Element")
 
@@ -55,22 +56,22 @@ struct SharedElementView: View {
     private func gridCard(for item: SharedElementItem) -> some View {
         VStack(spacing: Spacing.sm) {
             Image(systemName: item.icon)
-                .font(.title)
-                .foregroundStyle(.white)
+                .font(PPFont.title)
+                .foregroundStyle(Color.fgInverse)
                 .frame(width: 56, height: 56)
                 .background(item.color.gradient)
                 .clipShape(RoundedRectangle(cornerRadius: CornerRadius.md, style: .continuous))
                 .matchedGeometryEffect(id: "\(item.id)-icon", in: namespace)
 
             Text(item.title)
-                .font(.subheadline.weight(.semibold))
+                .font(PPFont.bodyMdStrong)
                 .matchedGeometryEffect(id: "\(item.id)-title", in: namespace)
         }
         .frame(maxWidth: .infinity)
         .padding(Spacing.md)
         .background(
             RoundedRectangle(cornerRadius: CornerRadius.lg, style: .continuous)
-                .fill(Color(.secondarySystemBackground))
+                .fill(Color.bgRaised)
                 .matchedGeometryEffect(id: "\(item.id)-bg", in: namespace)
         )
         .shadowSmall()
@@ -103,7 +104,7 @@ struct SharedElementView: View {
             VStack(spacing: Spacing.lg) {
                 Image(systemName: item.icon)
                     .font(.system(size: 44))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Color.fgInverse)
                     .frame(width: 88, height: 88)
                     .background(item.color.gradient)
                     .clipShape(RoundedRectangle(cornerRadius: CornerRadius.xl, style: .continuous))
@@ -112,12 +113,12 @@ struct SharedElementView: View {
 
                 VStack(spacing: Spacing.xs) {
                     Text(item.title)
-                        .font(.title2.weight(.semibold))
+                        .font(PPFont.title)
                         .matchedGeometryEffect(id: "\(item.id)-title", in: namespace)
 
                     Text(item.subtitle)
-                        .font(.body)
-                        .foregroundStyle(.secondary)
+                        .font(PPFont.bodyLg)
+                        .foregroundStyle(Color.fgSecondary)
                         .multilineTextAlignment(.center)
                 }
 
@@ -139,7 +140,7 @@ struct SharedElementView: View {
             .frame(maxWidth: .infinity, maxHeight: 360)
             .background(
                 RoundedRectangle(cornerRadius: CornerRadius.xl, style: .continuous)
-                    .fill(Color(.systemBackground))
+                    .fill(Color.bgBase)
                     .matchedGeometryEffect(id: "\(item.id)-bg", in: namespace)
             )
             .shadowLarge()

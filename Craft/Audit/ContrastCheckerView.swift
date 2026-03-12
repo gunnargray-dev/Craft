@@ -28,6 +28,7 @@ struct ContrastCheckerView: View {
             .padding(.top, Spacing.sm)
             .padding(.bottom, Spacing.xxl)
         }
+        .background(Color.bgBase)
         .navigationTitle("Contrast Checker")
         .navigationBarTitleDisplayMode(.inline)
         .onChange(of: foregroundColor) { _, _ in updateRatio() }
@@ -39,22 +40,22 @@ struct ContrastCheckerView: View {
     private var previewSection: some View {
         VStack(spacing: Spacing.sm) {
             Text("Preview")
-                .font(.caption)
+                .font(PPFont.caption)
                 .fontWeight(.semibold)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.fgSecondary)
                 .textCase(.uppercase)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             VStack(spacing: Spacing.sm) {
                 Text("The quick brown fox jumps over the lazy dog.")
-                    .font(.title3)
+                    .font(PPFont.section)
                     .fontWeight(.semibold)
 
                 Text("This sample text demonstrates how your chosen foreground color appears on the selected background. Check the contrast ratio below to ensure readability.")
-                    .font(.body)
+                    .font(PPFont.bodyLg)
 
                 Text("Caption text — 12pt")
-                    .font(.caption)
+                    .font(PPFont.caption)
             }
             .foregroundStyle(foregroundColor)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -62,7 +63,7 @@ struct ContrastCheckerView: View {
             .background(backgroundColor, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
             .overlay(
                 RoundedRectangle(cornerRadius: CornerRadius.lg)
-                    .strokeBorder(.primary.opacity(0.1), lineWidth: 1)
+                    .strokeBorder(Color.fgPrimary.opacity(0.1), lineWidth: 1)
             )
         }
     }
@@ -72,21 +73,21 @@ struct ContrastCheckerView: View {
     private var resultSection: some View {
         VStack(spacing: Spacing.xs) {
             Text("Contrast Ratio")
-                .font(.caption)
+                .font(PPFont.caption)
                 .fontWeight(.semibold)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.fgSecondary)
                 .textCase(.uppercase)
 
             Text(String(format: "%.2f : 1", contrastRatio))
                 .font(.system(.largeTitle, design: .rounded))
                 .fontWeight(.bold)
-                .foregroundStyle(.primary)
+                .foregroundStyle(Color.fgPrimary)
                 .contentTransition(.numericText(value: contrastRatio))
                 .animation(Springs.snappy, value: contrastRatio)
         }
         .frame(maxWidth: .infinity)
         .padding(Spacing.lg)
-        .background(.background, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
+        .background(Color.bgRaised, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
         .shadowSmall()
     }
 
@@ -96,13 +97,13 @@ struct ContrastCheckerView: View {
         VStack(spacing: Spacing.md) {
             ColorPicker(selection: $foregroundColor, supportsOpacity: false) {
                 Label("Foreground", systemImage: "textformat")
-                    .font(.body)
+                    .font(PPFont.bodyLg)
             }
             .frame(minHeight: 44)
 
             ColorPicker(selection: $backgroundColor, supportsOpacity: false) {
                 Label("Background", systemImage: "rectangle.fill")
-                    .font(.body)
+                    .font(PPFont.bodyLg)
             }
             .frame(minHeight: 44)
 
@@ -112,7 +113,7 @@ struct ContrastCheckerView: View {
                 backgroundColor = temp
             } label: {
                 Label("Swap Colors", systemImage: "arrow.up.arrow.down")
-                    .font(.subheadline)
+                    .font(PPFont.bodyMd)
                     .fontWeight(.medium)
                     .frame(maxWidth: .infinity)
                     .frame(minHeight: 44)
@@ -121,7 +122,7 @@ struct ContrastCheckerView: View {
             .pressEffect()
         }
         .padding(Spacing.md)
-        .background(.background, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
+        .background(Color.bgRaised, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
         .shadowSmall()
     }
 
@@ -130,9 +131,9 @@ struct ContrastCheckerView: View {
     private var badgesSection: some View {
         VStack(spacing: Spacing.sm) {
             Text("WCAG Compliance")
-                .font(.caption)
+                .font(PPFont.caption)
                 .fontWeight(.semibold)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.fgSecondary)
                 .textCase(.uppercase)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -210,33 +211,33 @@ private struct WCAGBadge: View {
     var body: some View {
         HStack(spacing: Spacing.sm) {
             Image(systemName: passes ? "checkmark.circle.fill" : "xmark.circle.fill")
-                .font(.title2)
-                .foregroundStyle(passes ? .green : .red)
+                .font(PPFont.title)
+                .foregroundStyle(passes ? Color.positiveFgPrimary : Color.negativeFgPrimary)
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(level)
-                    .font(.headline)
+                    .font(PPFont.section)
                 Text(subtitle)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
             }
 
             Spacer(minLength: 0)
 
             Text(passes ? "Pass" : "Fail")
-                .font(.caption)
+                .font(PPFont.caption)
                 .fontWeight(.semibold)
-                .foregroundStyle(passes ? .green : .red)
+                .foregroundStyle(passes ? Color.positiveFgPrimary : Color.negativeFgPrimary)
                 .padding(.horizontal, Spacing.xs)
                 .padding(.vertical, Spacing.xxs)
                 .background(
-                    (passes ? Color.green : Color.red).opacity(0.12),
+                    (passes ? Color.positiveFgPrimary : Color.negativeFgPrimary).opacity(0.12),
                     in: RoundedRectangle(cornerRadius: CornerRadius.sm)
                 )
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(Spacing.sm)
-        .background(.background, in: RoundedRectangle(cornerRadius: CornerRadius.md))
+        .background(Color.bgRaised, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
         .shadowSmall()
         .contentTransition(.symbolEffect(.replace))
         .animation(Springs.snappy, value: passes)

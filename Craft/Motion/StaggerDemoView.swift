@@ -7,8 +7,8 @@ struct StaggerDemoView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let cardColors: [Color] = [
-        .blue, .purple, .pink, .red,
-        .orange, .yellow, .green, .teal,
+        Color.blue600, Color.purple600, Color.pink600, Color.red600,
+        Color.orange600, Color.yellow600, Color.green600, Color.teal600,
     ]
 
     var body: some View {
@@ -25,6 +25,7 @@ struct StaggerDemoView: View {
             .padding(.horizontal, Spacing.systemMargin)
             .padding(.vertical, Spacing.md)
         }
+        .background(Color.bgBase)
         .navigationTitle("Stagger")
     }
 
@@ -35,11 +36,11 @@ struct StaggerDemoView: View {
             VStack(alignment: .leading, spacing: Spacing.xs) {
                 HStack {
                     Text("Stagger Delay")
-                        .font(.subheadline.weight(.semibold))
+                        .font(PPFont.bodyMdStrong)
                     Spacer()
                     Text("\(String(format: "%.3f", staggerDelay))s")
                         .font(.subheadline.monospacedDigit())
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color.fgSecondary)
                 }
 
                 Slider(value: $staggerDelay, in: 0.0...0.2, step: 0.005) {
@@ -70,7 +71,7 @@ struct StaggerDemoView: View {
             }
         }
         .padding(Spacing.md)
-        .background(Color(.secondarySystemBackground))
+        .background(Color.bgRaised)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.md, style: .continuous))
     }
 
@@ -124,20 +125,20 @@ private struct StaggerCard: View {
 
             VStack(alignment: .leading, spacing: Spacing.xxs) {
                 Text("Card \(index + 1)")
-                    .font(.body.weight(.semibold))
+                    .font(PPFont.bodyLgStrong)
                 Text("Delay: \(String(format: "%.3f", delay))s")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
             }
 
             Spacer()
 
             Image(systemName: "chevron.right")
-                .font(.caption)
-                .foregroundStyle(.tertiary)
+                .font(PPFont.caption)
+                .foregroundStyle(Color.fgTertiary)
         }
         .padding(Spacing.md)
-        .background(Color(.secondarySystemBackground))
+        .background(Color.bgRaised)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.md, style: .continuous))
         .shadowSmall()
         .opacity(isShowing ? 1 : 0)

@@ -5,8 +5,8 @@ struct DynamicTypePreviewView: View {
         ScrollView {
             VStack(spacing: Spacing.lg) {
                 Text("The same card rendered at three Dynamic Type sizes to verify layout flexibility.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.bodyMd)
+                    .foregroundStyle(Color.fgSecondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, Spacing.systemMargin)
                     .enterAnimation(delay: 0.0)
@@ -35,6 +35,7 @@ struct DynamicTypePreviewView: View {
             .padding(.top, Spacing.sm)
             .padding(.bottom, Spacing.xxl)
         }
+        .background(Color.bgBase)
         .navigationTitle("Dynamic Type Preview")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -49,9 +50,9 @@ private struct SizeSection<Content: View>: View {
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.xs) {
             Text(label)
-                .font(.caption)
+                .font(PPFont.caption)
                 .fontWeight(.semibold)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(Color.fgSecondary)
                 .textCase(.uppercase)
                 .padding(.horizontal, Spacing.systemMargin)
 
@@ -72,43 +73,43 @@ private struct SampleCard: View {
                     .frame(width: 40, height: 40)
                     .overlay {
                         Image(systemName: "person.fill")
-                            .font(.body)
+                            .font(PPFont.bodyLg)
                             .foregroundStyle(.tint)
                     }
 
                 VStack(alignment: .leading, spacing: Spacing.xxs) {
                     Text("Alex Johnson")
-                        .font(.headline)
+                        .font(PPFont.section)
                     Text("Product Designer")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .font(PPFont.bodyMd)
+                        .foregroundStyle(Color.fgSecondary)
                 }
 
                 Spacer(minLength: 0)
             }
 
             Text("Building thoughtful interfaces that respect every user's needs. Accessibility isn't a feature — it's a foundation.")
-                .font(.body)
-                .foregroundStyle(.primary)
+                .font(PPFont.bodyLg)
+                .foregroundStyle(Color.fgPrimary)
 
             HStack(spacing: Spacing.sm) {
                 Label("12 projects", systemImage: "folder.fill")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
 
                 Spacer(minLength: 0)
 
                 Text("View Profile")
-                    .font(.subheadline)
+                    .font(PPFont.bodyMd)
                     .fontWeight(.semibold)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Color.fgInverse)
                     .padding(.horizontal, Spacing.md)
                     .padding(.vertical, Spacing.xs)
                     .background(.tint, in: RoundedRectangle(cornerRadius: CornerRadius.sm))
             }
         }
         .padding(Spacing.md)
-        .background(.background, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
+        .background(Color.bgRaised, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
         .shadowMedium()
     }
 }

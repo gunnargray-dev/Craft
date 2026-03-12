@@ -49,8 +49,8 @@ struct ButtonGalleryView: View {
                     ForEach(Array(sizes.enumerated()), id: \.offset) { index, size in
                         HStack {
                             Text(size.0)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
+                                .font(PPFont.caption)
+                                .foregroundStyle(Color.fgSecondary)
                                 .frame(width: 80, alignment: .leading)
 
                             CraftButton(
@@ -85,8 +85,8 @@ struct ButtonGalleryView: View {
                     // Header row
                     ForEach(sizes, id: \.0) { size in
                         Text(size.0)
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
+                            .font(PPFont.caption)
+                            .foregroundStyle(Color.fgSecondary)
                     }
 
                     // Button rows
@@ -135,13 +135,13 @@ struct ButtonGalleryView: View {
 
                 VStack(spacing: Spacing.md) {
                     Text("Tap count: \(pressCount)")
-                        .font(.title2.weight(.semibold))
+                        .font(PPFont.title)
                         .contentTransition(.numericText(value: Double(pressCount)))
                         .animation(Springs.snappy, value: pressCount)
 
                     Text("Press any button above or below to increment")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(PPFont.caption)
+                        .foregroundStyle(Color.fgSecondary)
 
                     CraftButton(title: "Reset", level: .tertiary, size: .medium, icon: "arrow.counterclockwise") {
                         pressCount = 0
@@ -153,6 +153,7 @@ struct ButtonGalleryView: View {
                 Spacer(minLength: Spacing.xxl)
             }
         }
+        .background(Color.bgBase)
         .navigationTitle("Buttons")
     }
 }

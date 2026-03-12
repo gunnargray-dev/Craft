@@ -34,6 +34,7 @@ struct ChecklistView: View {
             .padding(.top, Spacing.sm)
             .padding(.bottom, Spacing.xxl)
         }
+        .background(Color.bgBase)
         .navigationTitle("Checklist")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -44,14 +45,14 @@ struct ChecklistView: View {
         VStack(spacing: Spacing.sm) {
             HStack {
                 Text("\(completedCount) of \(items.count) complete")
-                    .font(.headline)
+                    .font(PPFont.section)
                     .contentTransition(.numericText(value: Double(completedCount)))
                     .animation(Springs.snappy, value: completedCount)
 
                 Spacer()
 
                 Text("\(Int(progress * 100))%")
-                    .font(.subheadline)
+                    .font(PPFont.bodyMd)
                     .fontWeight(.semibold)
                     .foregroundStyle(.tint)
                     .contentTransition(.numericText(value: progress))
@@ -61,7 +62,7 @@ struct ChecklistView: View {
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: CornerRadius.full)
-                        .fill(.primary.opacity(0.08))
+                        .fill(Color.fgPrimary.opacity(0.08))
                         .frame(height: 8)
 
                     RoundedRectangle(cornerRadius: CornerRadius.full)
@@ -73,7 +74,7 @@ struct ChecklistView: View {
             .frame(height: 8)
         }
         .padding(Spacing.md)
-        .background(.background, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
+        .background(Color.bgRaised, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
         .shadowSmall()
     }
 }
@@ -88,21 +89,21 @@ private struct ChecklistRow: View {
         Button(action: toggle) {
             HStack(alignment: .top, spacing: Spacing.sm) {
                 Image(systemName: item.isChecked ? "checkmark.circle.fill" : "circle")
-                    .font(.title3)
-                    .foregroundStyle(item.isChecked ? .green : .secondary)
+                    .font(PPFont.section)
+                    .foregroundStyle(item.isChecked ? Color.positiveFgPrimary : Color.fgSecondary)
                     .frame(width: 28)
                     .contentTransition(.symbolEffect(.replace))
 
                 VStack(alignment: .leading, spacing: Spacing.xxs) {
                     Text(item.title)
-                        .font(.body)
+                        .font(PPFont.bodyLg)
                         .fontWeight(.medium)
-                        .foregroundStyle(item.isChecked ? .secondary : .primary)
+                        .foregroundStyle(item.isChecked ? Color.fgSecondary : Color.fgPrimary)
                         .strikethrough(item.isChecked)
 
                     Text(item.description)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(PPFont.caption)
+                        .foregroundStyle(Color.fgSecondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
 
@@ -110,7 +111,7 @@ private struct ChecklistRow: View {
             }
             .padding(Spacing.sm)
             .frame(minHeight: 44)
-            .background(.background, in: RoundedRectangle(cornerRadius: CornerRadius.md))
+            .background(Color.bgRaised, in: RoundedRectangle(cornerRadius: CornerRadius.md))
             .shadowSmall()
         }
         .buttonStyle(.plain)

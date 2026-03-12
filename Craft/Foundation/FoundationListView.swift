@@ -40,7 +40,10 @@ struct FoundationListView: View {
                     BorderRadiusView()
                 }
             }
+            .listRowBackground(Color.bgRaised)
         }
+        .scrollContentBackground(.hidden)
+        .background(Color.bgBase)
         .navigationTitle("Foundation")
     }
 

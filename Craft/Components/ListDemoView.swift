@@ -18,14 +18,14 @@ struct ListItem: Identifiable {
 
 struct ListDemoView: View {
     @State private var items: [ListItem] = [
-        ListItem(icon: "bell.fill", iconColor: .red, title: "Notifications", subtitle: "Manage your alerts", trailing: .badge("3")),
+        ListItem(icon: "bell.fill", iconColor: .negativeFgPrimary, title: "Notifications", subtitle: "Manage your alerts", trailing: .badge("3")),
         ListItem(icon: "moon.fill", iconColor: .indigo, title: "Do Not Disturb", subtitle: "Silence calls and notifications", trailing: .toggle),
-        ListItem(icon: "wifi", iconColor: .blue, title: "Wi-Fi", subtitle: "Connected to Home Network", trailing: .text("Home")),
-        ListItem(icon: "battery.100", iconColor: .green, title: "Battery", subtitle: "98% charged", trailing: .chevron),
+        ListItem(icon: "wifi", iconColor: Color.blue600, title: "Wi-Fi", subtitle: "Connected to Home Network", trailing: .text("Home")),
+        ListItem(icon: "battery.100", iconColor: .positiveFgPrimary, title: "Battery", subtitle: "98% charged", trailing: .chevron),
         ListItem(icon: "lock.fill", iconColor: .gray, title: "Privacy", subtitle: "Control app permissions", trailing: .chevron),
-        ListItem(icon: "paintbrush.fill", iconColor: .orange, title: "Appearance", subtitle: "Theme and display settings", trailing: .chevron),
+        ListItem(icon: "paintbrush.fill", iconColor: Color.orange600, title: "Appearance", subtitle: "Theme and display settings", trailing: .chevron),
         ListItem(icon: "icloud.fill", iconColor: .cyan, title: "Cloud Sync", subtitle: "Last synced 2 min ago", trailing: .text("On")),
-        ListItem(icon: "star.fill", iconColor: .yellow, title: "Favorites", subtitle: "Your saved items", trailing: .badge("12")),
+        ListItem(icon: "star.fill", iconColor: Color.yellow600, title: "Favorites", subtitle: "Your saved items", trailing: .badge("12")),
     ]
 
     @State private var toggleStates: [UUID: Bool] = [:]
@@ -50,7 +50,7 @@ struct ListDemoView: View {
                             } label: {
                                 Label("Edit", systemImage: "pencil")
                             }
-                            .tint(.accentColor)
+                            .tint(Color.accentFgPrimary)
                         }
                 }
                 .onMove { indices, newOffset in
@@ -85,8 +85,8 @@ struct ListDemoView: View {
         HStack(spacing: Spacing.sm) {
             // Leading icon
             Image(systemName: item.icon)
-                .font(.body)
-                .foregroundStyle(.white)
+                .font(PPFont.bodyLg)
+                .foregroundStyle(Color.fgInverse)
                 .frame(width: 32, height: 32)
                 .background(item.iconColor)
                 .clipShape(RoundedRectangle(cornerRadius: CornerRadius.sm, style: .continuous))
@@ -94,10 +94,10 @@ struct ListDemoView: View {
             // Title + subtitle
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.title)
-                    .font(.body)
+                    .font(PPFont.bodyLg)
                 Text(item.subtitle)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
             }
 
             Spacer(minLength: Spacing.xs)
@@ -113,16 +113,16 @@ struct ListDemoView: View {
         switch item.trailing {
         case .chevron:
             Image(systemName: "chevron.right")
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(.tertiary)
+                .font(PPFont.caption)
+                .foregroundStyle(Color.fgTertiary)
 
         case .badge(let count):
             Text(count)
-                .font(.caption2.weight(.semibold))
-                .foregroundStyle(.white)
+                .font(PPFont.caption)
+                .foregroundStyle(Color.fgInverse)
                 .padding(.horizontal, Spacing.xs)
                 .padding(.vertical, Spacing.xxs)
-                .background(.red)
+                .background(Color.negativeFgPrimary)
                 .clipShape(Capsule())
 
         case .toggle:
@@ -134,8 +134,8 @@ struct ListDemoView: View {
 
         case .text(let value):
             Text(value)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .font(PPFont.bodyMd)
+                .foregroundStyle(Color.fgSecondary)
         }
     }
 
@@ -143,9 +143,9 @@ struct ListDemoView: View {
 
     private var compactItems: [ListItem] {
         [
-            ListItem(icon: "doc.text", iconColor: .blue, title: "Documents", subtitle: "24 files", trailing: .chevron),
-            ListItem(icon: "photo", iconColor: .green, title: "Photos", subtitle: "1,432 items", trailing: .chevron),
-            ListItem(icon: "music.note", iconColor: .pink, title: "Music", subtitle: "86 songs", trailing: .chevron),
+            ListItem(icon: "doc.text", iconColor: Color.blue600, title: "Documents", subtitle: "24 files", trailing: .chevron),
+            ListItem(icon: "photo", iconColor: .positiveFgPrimary, title: "Photos", subtitle: "1,432 items", trailing: .chevron),
+            ListItem(icon: "music.note", iconColor: Color.pink600, title: "Music", subtitle: "86 songs", trailing: .chevron),
         ]
     }
 
@@ -153,22 +153,22 @@ struct ListDemoView: View {
     private func compactRow(item: ListItem) -> some View {
         HStack(spacing: Spacing.sm) {
             Image(systemName: item.icon)
-                .font(.body)
+                .font(PPFont.bodyLg)
                 .foregroundStyle(item.iconColor)
                 .frame(width: 24)
 
             Text(item.title)
-                .font(.body)
+                .font(PPFont.bodyLg)
 
             Spacer()
 
             Text(item.subtitle)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .font(PPFont.bodyMd)
+                .foregroundStyle(Color.fgSecondary)
 
             Image(systemName: "chevron.right")
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(.tertiary)
+                .font(PPFont.caption)
+                .foregroundStyle(Color.fgTertiary)
         }
         .frame(minHeight: 44)
     }

@@ -69,6 +69,7 @@ struct CardGalleryView: View {
                 Spacer(minLength: Spacing.xxl)
             }
         }
+        .background(Color.bgBase)
         .navigationTitle("Cards")
     }
 
@@ -77,26 +78,26 @@ struct CardGalleryView: View {
     private var tappableCard: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             RoundedRectangle(cornerRadius: innerRadius, style: .continuous)
-                .fill(Color.accentColor.opacity(0.12))
+                .fill(Color.accentBgSubtle)
                 .frame(height: 160)
                 .overlay(
                     Image(systemName: "photo")
-                        .font(.largeTitle)
-                        .foregroundStyle(.secondary)
+                        .font(PPFont.display)
+                        .foregroundStyle(Color.fgSecondary)
                 )
 
             VStack(alignment: .leading, spacing: Spacing.xxs) {
                 Text("Tappable Card")
-                    .font(.headline)
+                    .font(PPFont.section)
 
                 Text("This card has a press effect with shadow elevation change. Tap to see it in action.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.bodyMd)
+                    .foregroundStyle(Color.fgSecondary)
             }
             .padding(.horizontal, cardPadding)
             .padding(.bottom, cardPadding)
         }
-        .background(Color(.secondarySystemGroupedBackground))
+        .background(Color.bgRaised)
         .clipShape(RoundedRectangle(cornerRadius: outerRadius, style: .continuous))
         .shadow(
             color: tappedCard ? Shadows.large.color : Shadows.small.color,
@@ -124,19 +125,19 @@ struct CardGalleryView: View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             HStack(spacing: Spacing.sm) {
                 Circle()
-                    .fill(Color.orange.opacity(0.2))
+                    .fill(Color.orange600.opacity(0.2))
                     .frame(width: 48, height: 48)
                     .overlay(
                         Image(systemName: "person.fill")
-                            .foregroundStyle(.orange)
+                            .foregroundStyle(Color.orange600)
                     )
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Alex Johnson")
-                        .font(.headline)
+                        .font(PPFont.section)
                     Text("Product Designer")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .font(PPFont.bodyMd)
+                        .foregroundStyle(Color.fgSecondary)
                 }
 
                 Spacer()
@@ -147,8 +148,8 @@ struct CardGalleryView: View {
                     }
                 } label: {
                     Image(systemName: favorited ? "heart.fill" : "heart")
-                        .font(.title3)
-                        .foregroundStyle(favorited ? .red : .secondary)
+                        .font(PPFont.section)
+                        .foregroundStyle(favorited ? Color.negativeFgPrimary : Color.fgSecondary)
                         .contentTransition(.symbolEffect(.replace))
                 }
                 .frame(minWidth: 44, minHeight: 44)
@@ -157,8 +158,8 @@ struct CardGalleryView: View {
             .padding(.top, cardPadding)
 
             Text("Building design systems that bridge the gap between design and engineering. Passionate about motion and interaction design.")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .font(PPFont.bodyMd)
+                .foregroundStyle(Color.fgSecondary)
                 .padding(.horizontal, cardPadding)
 
             Divider()
@@ -174,7 +175,7 @@ struct CardGalleryView: View {
             .padding(.horizontal, cardPadding)
             .padding(.bottom, cardPadding)
         }
-        .background(Color(.secondarySystemGroupedBackground))
+        .background(Color.bgRaised)
         .clipShape(RoundedRectangle(cornerRadius: outerRadius, style: .continuous))
         .shadowMedium()
     }
@@ -184,30 +185,30 @@ struct CardGalleryView: View {
     private var loadedCard: some View {
         HStack(spacing: Spacing.sm) {
             RoundedRectangle(cornerRadius: innerRadius, style: .continuous)
-                .fill(Color.purple.opacity(0.15))
+                .fill(Color.purple600.opacity(0.15))
                 .frame(width: 80, height: 80)
                 .overlay(
                     Image(systemName: "star.fill")
-                        .font(.title2)
-                        .foregroundStyle(.purple)
+                        .font(PPFont.title)
+                        .foregroundStyle(Color.purple600)
                 )
 
             VStack(alignment: .leading, spacing: Spacing.xxs) {
                 Text("Featured Item")
-                    .font(.headline)
+                    .font(PPFont.section)
                 Text("This is the loaded state of the card with real content.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.bodyMd)
+                    .foregroundStyle(Color.fgSecondary)
                     .lineLimit(2)
                 Text("$29.99")
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Color.accentColor)
+                    .font(PPFont.bodyMdStrong)
+                    .foregroundStyle(Color.accentFgPrimary)
             }
 
             Spacer(minLength: 0)
         }
         .padding(cardPadding)
-        .background(Color(.secondarySystemGroupedBackground))
+        .background(Color.bgRaised)
         .clipShape(RoundedRectangle(cornerRadius: outerRadius, style: .continuous))
         .shadowSmall()
     }
@@ -241,7 +242,7 @@ struct CardGalleryView: View {
             Spacer(minLength: 0)
         }
         .padding(cardPadding)
-        .background(Color(.secondarySystemGroupedBackground))
+        .background(Color.bgRaised)
         .clipShape(RoundedRectangle(cornerRadius: outerRadius, style: .continuous))
         .shadowSmall()
     }
@@ -251,36 +252,36 @@ struct CardGalleryView: View {
     private var concentricDemo: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             Text("Outer radius = inner radius + padding")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(PPFont.caption)
+                .foregroundStyle(Color.fgSecondary)
 
             HStack(spacing: Spacing.lg) {
                 VStack(spacing: Spacing.xs) {
                     Text("Correct")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(.green)
+                        .font(PPFont.caption)
+                        .foregroundStyle(Color.positiveFgPrimary)
 
                     RoundedRectangle(cornerRadius: outerRadius, style: .continuous)
-                        .strokeBorder(Color.green.opacity(0.4), lineWidth: 2)
+                        .strokeBorder(Color.green600.opacity(0.4), lineWidth: 2)
                         .frame(width: 120, height: 80)
                         .overlay(
                             RoundedRectangle(cornerRadius: innerRadius, style: .continuous)
-                                .fill(Color.green.opacity(0.15))
+                                .fill(Color.green600.opacity(0.15))
                                 .padding(cardPadding)
                         )
                 }
 
                 VStack(spacing: Spacing.xs) {
                     Text("Incorrect")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(.red)
+                        .font(PPFont.caption)
+                        .foregroundStyle(Color.negativeFgPrimary)
 
                     RoundedRectangle(cornerRadius: innerRadius, style: .continuous)
-                        .strokeBorder(Color.red.opacity(0.4), lineWidth: 2)
+                        .strokeBorder(Color.red600.opacity(0.4), lineWidth: 2)
                         .frame(width: 120, height: 80)
                         .overlay(
                             RoundedRectangle(cornerRadius: innerRadius, style: .continuous)
-                                .fill(Color.red.opacity(0.15))
+                                .fill(Color.red600.opacity(0.15))
                                 .padding(cardPadding)
                         )
                 }
@@ -288,7 +289,7 @@ struct CardGalleryView: View {
             .frame(maxWidth: .infinity)
         }
         .padding(cardPadding)
-        .background(Color(.secondarySystemGroupedBackground))
+        .background(Color.bgRaised)
         .clipShape(RoundedRectangle(cornerRadius: outerRadius, style: .continuous))
         .shadowSmall()
     }

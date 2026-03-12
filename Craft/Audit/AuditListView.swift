@@ -40,6 +40,7 @@ struct AuditListView: View {
             .padding(.top, Spacing.sm)
             .padding(.bottom, Spacing.xxl)
         }
+        .background(Color.bgBase)
         .navigationTitle("Audit")
     }
 }
@@ -58,28 +59,28 @@ private struct AuditRow<Destination: View>: View {
         } label: {
             HStack(spacing: Spacing.md) {
                 Image(systemName: icon)
-                    .font(.title2)
+                    .font(PPFont.title)
                     .foregroundStyle(.tint)
                     .frame(width: 44, height: 44)
                     .background(.tint.opacity(0.12), in: RoundedRectangle(cornerRadius: CornerRadius.sm))
 
                 VStack(alignment: .leading, spacing: Spacing.xxs) {
                     Text(title)
-                        .font(.headline)
-                        .foregroundStyle(.primary)
+                        .font(PPFont.section)
+                        .foregroundStyle(Color.fgPrimary)
                     Text(subtitle)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .font(PPFont.bodyMd)
+                        .foregroundStyle(Color.fgSecondary)
                 }
 
                 Spacer(minLength: 0)
 
                 Image(systemName: "chevron.right")
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(.tertiary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgTertiary)
             }
             .padding(Spacing.md)
-            .background(.background, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
+            .background(Color.bgRaised, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
             .shadowSmall()
         }
         .buttonStyle(.plain)

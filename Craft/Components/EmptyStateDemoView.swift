@@ -54,6 +54,7 @@ struct EmptyStateDemoView: View {
                 Spacer(minLength: Spacing.xxl)
             }
         }
+        .background(Color.bgBase)
         .navigationTitle("Empty States")
     }
 
@@ -63,24 +64,24 @@ struct EmptyStateDemoView: View {
         VStack(spacing: Spacing.lg) {
             ZStack {
                 Circle()
-                    .fill(Color.accentColor.opacity(0.1))
+                    .fill(Color.accentFgPrimary.opacity(0.1))
                     .frame(width: 120, height: 120)
 
                 Image(systemName: "sparkles")
                     .font(.system(size: 48))
-                    .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(Color.accentFgPrimary)
                     .symbolEffect(.pulse)
             }
             .enterAnimation(delay: 0.1)
 
             VStack(spacing: Spacing.xs) {
                 Text("Welcome to Craft")
-                    .font(.title2.weight(.semibold))
+                    .font(PPFont.title)
                     .multilineTextAlignment(.center)
 
                 Text("Your design system reference, all in one place. Explore components, typography, color, spacing, and motion patterns.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.bodyMd)
+                    .foregroundStyle(Color.fgSecondary)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -111,30 +112,30 @@ struct EmptyStateDemoView: View {
         VStack(spacing: Spacing.lg) {
             ZStack {
                 Circle()
-                    .fill(Color.red.opacity(0.1))
+                    .fill(Color.negativeBgBase)
                     .frame(width: 120, height: 120)
 
                 Image(systemName: "exclamationmark.icloud.fill")
                     .font(.system(size: 48))
-                    .foregroundStyle(.red)
+                    .foregroundStyle(Color.negativeFgPrimary)
             }
             .enterAnimation(delay: 0.1)
 
             VStack(spacing: Spacing.xs) {
                 Text("Something Went Wrong")
-                    .font(.title2.weight(.semibold))
+                    .font(PPFont.title)
                     .multilineTextAlignment(.center)
 
                 Text("We couldn't load the content. Check your connection and try again.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.bodyMd)
+                    .foregroundStyle(Color.fgSecondary)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
 
                 if retryCount > 0 {
                     Text("Retried \(retryCount) time\(retryCount == 1 ? "" : "s")")
-                        .font(.caption)
-                        .foregroundStyle(.tertiary)
+                        .font(PPFont.caption)
+                        .foregroundStyle(Color.fgTertiary)
                         .contentTransition(.numericText(value: Double(retryCount)))
                 }
             }
@@ -170,23 +171,23 @@ struct EmptyStateDemoView: View {
         VStack(spacing: Spacing.lg) {
             ZStack {
                 Circle()
-                    .fill(Color.orange.opacity(0.1))
+                    .fill(Color.warningBgBase)
                     .frame(width: 120, height: 120)
 
                 Image(systemName: "magnifyingglass")
                     .font(.system(size: 48))
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(Color.warningFgPrimary)
             }
             .enterAnimation(delay: 0.1)
 
             VStack(spacing: Spacing.xs) {
                 Text("No Results Found")
-                    .font(.title2.weight(.semibold))
+                    .font(PPFont.title)
                     .multilineTextAlignment(.center)
 
                 Text("Try adjusting your search or filters to find what you're looking for.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.bodyMd)
+                    .foregroundStyle(Color.fgSecondary)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -194,7 +195,7 @@ struct EmptyStateDemoView: View {
 
             VStack(alignment: .leading, spacing: Spacing.sm) {
                 Text("Suggestions")
-                    .font(.subheadline.weight(.semibold))
+                    .font(PPFont.bodyMdStrong)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 suggestionRow(icon: "textformat.abc", text: "Check for spelling errors")
@@ -202,7 +203,7 @@ struct EmptyStateDemoView: View {
                 suggestionRow(icon: "arrow.uturn.backward", text: "Try a broader search term")
             }
             .padding(Spacing.md)
-            .background(Color(.tertiarySystemFill))
+            .background(Color.bgSoft)
             .clipShape(RoundedRectangle(cornerRadius: CornerRadius.lg, style: .continuous))
             .enterAnimation(delay: 0.2)
 
@@ -220,12 +221,12 @@ struct EmptyStateDemoView: View {
     private func suggestionRow(icon: String, text: String) -> some View {
         HStack(spacing: Spacing.sm) {
             Image(systemName: icon)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .font(PPFont.bodyMd)
+                .foregroundStyle(Color.fgSecondary)
                 .frame(width: 24)
             Text(text)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
+                .font(PPFont.bodyMd)
+                .foregroundStyle(Color.fgSecondary)
         }
     }
 }

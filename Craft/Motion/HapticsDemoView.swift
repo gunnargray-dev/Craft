@@ -116,6 +116,7 @@ struct HapticsDemoView: View {
             .padding(.horizontal, Spacing.systemMargin)
             .padding(.vertical, Spacing.md)
         }
+        .background(Color.bgBase)
         .navigationTitle("Haptics")
     }
 }
@@ -130,31 +131,31 @@ private struct HapticRow: View {
     var body: some View {
         HStack(spacing: Spacing.sm) {
             Image(systemName: haptic.icon)
-                .font(.title3)
-                .foregroundStyle(Color.accentColor)
+                .font(PPFont.section)
+                .foregroundStyle(Color.accentFgPrimary)
                 .frame(width: 44, height: 44)
-                .background(Color.accentColor.opacity(0.1))
+                .background(Color.accentFgPrimary.opacity(0.1))
                 .clipShape(RoundedRectangle(cornerRadius: CornerRadius.sm, style: .continuous))
 
             VStack(alignment: .leading, spacing: Spacing.xxs) {
                 Text(haptic.name)
-                    .font(.body.weight(.semibold))
+                    .font(PPFont.bodyLgStrong)
                 Text(haptic.description)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
                     .lineLimit(2)
             }
 
             Spacer(minLength: Spacing.xs)
 
             Image(systemName: "play.circle.fill")
-                .font(.title2)
-                .foregroundStyle(Color.accentColor)
+                .font(PPFont.title)
+                .foregroundStyle(Color.accentFgPrimary)
                 .symbolEffect(.bounce, value: didTap)
         }
         .padding(Spacing.sm)
         .frame(minHeight: 44)
-        .background(Color(.secondarySystemBackground))
+        .background(Color.bgRaised)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.md, style: .continuous))
         .contentShape(RoundedRectangle(cornerRadius: CornerRadius.md, style: .continuous))
         .pressEffect {

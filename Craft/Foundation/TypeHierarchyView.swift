@@ -5,8 +5,8 @@ struct TypeHierarchyView: View {
         ScrollView {
             VStack(spacing: Spacing.lg) {
                 Text("Compare type hierarchy discipline. Limit to 2-3 levels for clarity.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.bodyMd)
+                    .foregroundStyle(Color.fgSecondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, Spacing.systemMargin)
                     .enterAnimation(delay: 0)
@@ -19,6 +19,7 @@ struct TypeHierarchyView: View {
             }
             .padding(.vertical, Spacing.md)
         }
+        .background(Color.bgBase)
         .navigationTitle("Type Hierarchy")
     }
 
@@ -28,31 +29,31 @@ struct TypeHierarchyView: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: Spacing.xs) {
                 Image(systemName: "checkmark.circle.fill")
-                    .foregroundStyle(.green)
+                    .foregroundStyle(Color.positiveFgPrimary)
                 Text("Good")
-                    .font(.headline)
+                    .font(PPFont.section)
             }
             .padding(.bottom, Spacing.md)
 
             cardContent {
                 VStack(alignment: .leading, spacing: Spacing.sm) {
                     Text("Weekend Trip")
-                        .font(.title3)
+                        .font(PPFont.section)
                         .fontWeight(.semibold)
 
                     Text("Pack light and bring only what you need. A small carry-on works best for short getaways.")
-                        .font(.body)
-                        .foregroundStyle(.secondary)
+                        .font(PPFont.bodyLg)
+                        .foregroundStyle(Color.fgSecondary)
 
                     Text("3 days ago")
-                        .font(.caption)
-                        .foregroundStyle(.tertiary)
+                        .font(PPFont.caption)
+                        .foregroundStyle(Color.fgTertiary)
                 }
             }
 
             Text("3 levels: title, body, caption")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(PPFont.caption)
+                .foregroundStyle(Color.fgSecondary)
                 .padding(.top, Spacing.sm)
         }
         .enterAnimation(delay: 0.1)
@@ -64,44 +65,44 @@ struct TypeHierarchyView: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: Spacing.xs) {
                 Image(systemName: "xmark.circle.fill")
-                    .foregroundStyle(.red)
+                    .foregroundStyle(Color.negativeFgPrimary)
                 Text("Bad")
-                    .font(.headline)
+                    .font(PPFont.section)
             }
             .padding(.bottom, Spacing.md)
 
             cardContent {
                 VStack(alignment: .leading, spacing: Spacing.xs) {
                     Text("TRIP")
-                        .font(.caption)
+                        .font(PPFont.caption)
                         .fontWeight(.black)
                         .tracking(2)
 
                     Text("Weekend")
-                        .font(.title2)
+                        .font(PPFont.title)
                         .fontWeight(.light)
 
                     Text("Trip Details")
-                        .font(.headline)
+                        .font(PPFont.section)
                         .italic()
 
                     Text("Pack light and bring what you need.")
-                        .font(.callout)
+                        .font(PPFont.bodyMd)
                         .fontWeight(.medium)
 
                     Text("Updated recently")
-                        .font(.footnote)
+                        .font(PPFont.caption)
                         .fontWeight(.bold)
 
                     Text("3 days ago")
-                        .font(.caption2)
+                        .font(PPFont.caption)
                         .fontWeight(.heavy)
                 }
             }
 
             Text("6 levels, mixed weights")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(PPFont.caption)
+                .foregroundStyle(Color.fgSecondary)
                 .padding(.top, Spacing.sm)
         }
         .enterAnimation(delay: 0.15)
@@ -116,7 +117,7 @@ struct TypeHierarchyView: View {
             .padding(Spacing.md)
             .background(
                 RoundedRectangle(cornerRadius: CornerRadius.md)
-                    .fill(Color(.secondarySystemBackground))
+                    .fill(Color.bgRaised)
             )
             .shadowSmall()
     }

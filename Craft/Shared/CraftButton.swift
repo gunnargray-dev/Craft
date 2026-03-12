@@ -35,19 +35,19 @@ enum CraftButtonSize: CaseIterable {
 
     var font: Font {
         switch self {
-        case .small: .subheadline.weight(.semibold)
-        case .medium: .body.weight(.semibold)
-        case .large: .body.weight(.semibold)
-        case .extraLarge: .headline.weight(.semibold)
+        case .small: PPFont.bodyMdStrong
+        case .medium: PPFont.bodyLgStrong
+        case .large: PPFont.bodyLgStrong
+        case .extraLarge: PPFont.section
         }
     }
 
     var cornerRadius: CGFloat {
         switch self {
-        case .small: CornerRadius.sm
-        case .medium: CornerRadius.md
-        case .large: CornerRadius.md
-        case .extraLarge: CornerRadius.lg
+        case .small: CornerRadius.lg
+        case .medium: CornerRadius.xl
+        case .large: CornerRadius.xl
+        case .extraLarge: CornerRadius.xxl
         }
     }
 
@@ -113,25 +113,25 @@ struct CraftButton: View {
 
     private var foregroundColor: Color {
         switch level {
-        case .primary: .white
-        case .secondary: .accentColor
-        case .tertiary: .accentColor
-        case .destructive: .white
+        case .primary: .fgInverse
+        case .secondary: .accentFgPrimary
+        case .tertiary: .accentFgPrimary
+        case .destructive: .fgInverse
         }
     }
 
     private var backgroundColor: Color {
         switch level {
-        case .primary: .accentColor
+        case .primary: .accentBgBase
         case .secondary: .clear
-        case .tertiary: Color(.tertiarySystemFill)
-        case .destructive: .red
+        case .tertiary: .bgSoft
+        case .destructive: .negativeBgBase
         }
     }
 
     private var borderColor: Color {
         switch level {
-        case .secondary: .accentColor.opacity(0.4)
+        case .secondary: .accentBorderSubtle
         default: .clear
         }
     }

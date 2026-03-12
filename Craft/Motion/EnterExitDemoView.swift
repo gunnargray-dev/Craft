@@ -22,6 +22,7 @@ struct EnterExitDemoView: View {
             .padding(.horizontal, Spacing.systemMargin)
             .padding(.vertical, Spacing.md)
         }
+        .background(Color.bgBase)
         .navigationTitle("Enter / Exit")
     }
 
@@ -54,44 +55,44 @@ struct EnterExitDemoView: View {
     private var parametersCard: some View {
         VStack(alignment: .leading, spacing: Spacing.sm) {
             Text("Animation Parameters")
-                .font(.headline)
+                .font(PPFont.section)
 
             Divider()
 
             HStack(spacing: Spacing.lg) {
                 VStack(alignment: .leading, spacing: Spacing.xs) {
                     Label("Enter", systemImage: "arrow.down")
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(.green)
+                        .font(PPFont.bodyMdStrong)
+                        .foregroundStyle(Color.positiveFgPrimary)
                     Group {
                         Text("opacity: 0 \u{2192} 1")
                         Text("translateY: 20pt \u{2192} 0")
                         Text("blur: 4pt \u{2192} 0")
                         Text("spring: 0.5 / 0.8")
                     }
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
                 }
 
                 Spacer()
 
                 VStack(alignment: .leading, spacing: Spacing.xs) {
                     Label("Exit", systemImage: "arrow.up")
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(.orange)
+                        .font(PPFont.bodyMdStrong)
+                        .foregroundStyle(Color.warningFgPrimary)
                     Group {
                         Text("opacity: 1 \u{2192} 0")
                         Text("translateY: 0 \u{2192} -12pt")
                         Text("blur: none")
                         Text("spring: 0.3 / 0.85")
                     }
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
                 }
             }
         }
         .padding(Spacing.md)
-        .background(Color(.secondarySystemBackground))
+        .background(Color.bgRaised)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.md, style: .continuous))
     }
 
@@ -100,7 +101,7 @@ struct EnterExitDemoView: View {
     private var demoArea: some View {
         ZStack {
             RoundedRectangle(cornerRadius: CornerRadius.lg, style: .continuous)
-                .fill(Color(.tertiarySystemBackground))
+                .fill(Color.bgSoft)
                 .frame(height: 300)
 
             if isVisible {
@@ -122,15 +123,15 @@ struct EnterExitDemoView: View {
     private var demoCard: some View {
         VStack(spacing: Spacing.sm) {
             Image(systemName: "sparkles")
-                .font(.largeTitle)
-                .foregroundStyle(Color.accentColor)
+                .font(PPFont.display)
+                .foregroundStyle(Color.accentFgPrimary)
 
             Text("Animated Card")
-                .font(.title3.weight(.semibold))
+                .font(PPFont.section)
 
             Text("This card enters with full motion and exits with a quieter animation.")
-                .font(.body)
-                .foregroundStyle(.secondary)
+                .font(PPFont.bodyLg)
+                .foregroundStyle(Color.fgSecondary)
                 .multilineTextAlignment(.center)
         }
         .padding(Spacing.lg)

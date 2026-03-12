@@ -1,48 +1,20 @@
 import SwiftUI
 
 struct TypeScaleView: View {
-    private let styles: [(name: String, style: Font.TextStyle, weight: String)] = [
-        ("Large Title", .largeTitle, "Regular"),
-        ("Title", .title, "Regular"),
-        ("Title 2", .title2, "Regular"),
-        ("Title 3", .title3, "Regular"),
-        ("Headline", .headline, "Semibold"),
-        ("Subheadline", .subheadline, "Regular"),
-        ("Body", .body, "Regular"),
-        ("Callout", .callout, "Regular"),
-        ("Footnote", .footnote, "Regular"),
-        ("Caption", .caption, "Regular"),
-        ("Caption 2", .caption2, "Regular"),
-    ]
-
-    /// Default point sizes at Large dynamic type size
-    private let defaultSizes: [Font.TextStyle: CGFloat] = [
-        .largeTitle: 34,
-        .title: 28,
-        .title2: 22,
-        .title3: 20,
-        .headline: 17,
-        .subheadline: 15,
-        .body: 17,
-        .callout: 16,
-        .footnote: 13,
-        .caption: 12,
-        .caption2: 11,
-    ]
-
-    /// Default leading values at Large dynamic type size
-    private let defaultLeading: [Font.TextStyle: CGFloat] = [
-        .largeTitle: 41,
-        .title: 34,
-        .title2: 28,
-        .title3: 25,
-        .headline: 22,
-        .subheadline: 20,
-        .body: 22,
-        .callout: 21,
-        .footnote: 18,
-        .caption: 16,
-        .caption2: 13,
+    private let styles: [(name: String, font: Font, spec: PPTypographyToken.Spec)] = [
+        ("Hero", PPFont.hero, PPTypographyToken.uiHeadingHero),
+        ("Display", PPFont.display, PPTypographyToken.uiHeadingDisplay),
+        ("Headline", PPFont.headline, PPTypographyToken.uiHeadingHeadline),
+        ("Title", PPFont.title, PPTypographyToken.uiHeadingTitle),
+        ("Section", PPFont.section, PPTypographyToken.uiHeadingSection),
+        ("Body Lg", PPFont.bodyLg, PPTypographyToken.uiTextBodyLgNormal),
+        ("Body Lg Strong", PPFont.bodyLgStrong, PPTypographyToken.uiTextBodyLgStrong),
+        ("Body Md", PPFont.bodyMd, PPTypographyToken.uiTextBodyMdNormal),
+        ("Body Md Strong", PPFont.bodyMdStrong, PPTypographyToken.uiTextBodyMdStrong),
+        ("Code Md", PPFont.codeMd, PPTypographyToken.uiTextCodeMd),
+        ("Code Sm", PPFont.codeSm, PPTypographyToken.uiTextCodeSm),
+        ("Caption", PPFont.caption, PPTypographyToken.uiTextCaptionNormal),
+        ("Caption Strong", PPFont.captionStrong, PPTypographyToken.uiTextCaptionStrong),
     ]
 
     var body: some View {
@@ -58,22 +30,24 @@ struct TypeScaleView: View {
                 }
             }
         }
+        .background(Color.bgBase)
         .navigationTitle("Type Scale")
     }
 
     @ViewBuilder
-    private func typeRow(item: (name: String, style: Font.TextStyle, weight: String), index: Int) -> some View {
-        let size = defaultSizes[item.style] ?? 17
-        let leading = defaultLeading[item.style] ?? 22
+    private func typeRow(item: (name: String, font: Font, spec: PPTypographyToken.Spec), index: Int) -> some View {
+        let spec = item.spec
+        let weightName = fontWeightName(spec.fontWeight)
 
         VStack(alignment: .leading, spacing: Spacing.xs) {
             Text(item.name)
-                .font(.system(item.style))
+                .font(item.font)
 
             HStack(spacing: Spacing.md) {
-                specBadge(label: "\(Int(size))pt")
-                specBadge(label: item.weight)
-                specBadge(label: "L: \(Int(leading))pt")
+                specBadge(label: spec.fontFamily)
+                specBadge(label: "\(Int(spec.fontSize))pt")
+                specBadge(label: weightName)
+                specBadge(label: "L: \(Int(spec.lineHeight))pt")
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -84,14 +58,24 @@ struct TypeScaleView: View {
 
     private func specBadge(label: String) -> some View {
         Text(label)
-            .font(.caption2)
-            .foregroundStyle(.secondary)
+            .font(PPFont.caption)
+            .foregroundStyle(Color.fgSecondary)
             .padding(.horizontal, Spacing.xs)
             .padding(.vertical, Spacing.xxs)
             .background(
                 RoundedRectangle(cornerRadius: CornerRadius.sm)
-                    .fill(Color(.quaternarySystemFill))
+                    .fill(Color.bgSoft)
             )
+    }
+
+    private func fontWeightName(_ weight: Int) -> String {
+        switch weight {
+        case 400: return "Regular"
+        case 500: return "Medium"
+        case 600: return "Semibold"
+        case 700: return "Bold"
+        default: return "\(weight)"
+        }
     }
 }
 

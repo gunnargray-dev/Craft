@@ -19,6 +19,7 @@ struct GestureDemoView: View {
             .padding(.horizontal, Spacing.systemMargin)
             .padding(.vertical, Spacing.md)
         }
+        .background(Color.bgBase)
         .navigationTitle("Gestures")
     }
 }
@@ -33,15 +34,15 @@ private struct GestureSectionHeader: View {
     var body: some View {
         HStack(spacing: Spacing.sm) {
             Image(systemName: icon)
-                .font(.title3)
-                .foregroundStyle(Color.accentColor)
+                .font(PPFont.section)
+                .foregroundStyle(Color.accentFgPrimary)
                 .frame(width: 36, height: 36)
             VStack(alignment: .leading, spacing: 0) {
                 Text(title)
-                    .font(.headline)
+                    .font(PPFont.section)
                 Text(subtitle)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
             }
             Spacer()
         }
@@ -77,13 +78,13 @@ private struct SwipeSection: View {
                 // Background indicators
                 HStack {
                     Image(systemName: "arrow.left.circle.fill")
-                        .font(.title)
-                        .foregroundStyle(.red)
+                        .font(PPFont.headline)
+                        .foregroundStyle(Color.negativeFgPrimary)
                         .opacity(swipeOffset < -20 ? Double(swipeProgress) : 0)
                     Spacer()
                     Image(systemName: "arrow.right.circle.fill")
-                        .font(.title)
-                        .foregroundStyle(.green)
+                        .font(PPFont.headline)
+                        .foregroundStyle(Color.positiveFgPrimary)
                         .opacity(swipeOffset > 20 ? Double(swipeProgress) : 0)
                 }
                 .padding(.horizontal, Spacing.lg)
@@ -91,20 +92,20 @@ private struct SwipeSection: View {
                 // Swipeable card
                 HStack(spacing: Spacing.sm) {
                     Image(systemName: "envelope.fill")
-                        .font(.title2)
-                        .foregroundStyle(Color.accentColor)
+                        .font(PPFont.title)
+                        .foregroundStyle(Color.accentFgPrimary)
                     VStack(alignment: .leading, spacing: Spacing.xxs) {
                         Text("Swipeable Card")
-                            .font(.body.weight(.semibold))
+                            .font(PPFont.bodyLgStrong)
                         Text("Direction: \(swipeDirection)")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .font(PPFont.caption)
+                            .foregroundStyle(Color.fgSecondary)
                     }
                     Spacer()
                 }
                 .padding(Spacing.md)
                 .frame(minHeight: 64)
-                .background(Color(.secondarySystemBackground))
+                .background(Color.bgRaised)
                 .clipShape(RoundedRectangle(cornerRadius: CornerRadius.md, style: .continuous))
                 .shadowSmall()
                 .offset(x: swipeOffset)
@@ -132,7 +133,7 @@ private struct SwipeSection: View {
             .clipShape(RoundedRectangle(cornerRadius: CornerRadius.md, style: .continuous))
         }
         .padding(Spacing.md)
-        .background(Color(.tertiarySystemBackground))
+        .background(Color.bgSoft)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.lg, style: .continuous))
     }
 }
@@ -159,14 +160,14 @@ private struct LongPressSection: View {
                 ZStack {
                     // Background ring
                     Circle()
-                        .stroke(Color(.tertiarySystemFill), lineWidth: 6)
+                        .stroke(Color.bgSoft, lineWidth: 6)
                         .frame(width: 100, height: 100)
 
                     // Progress ring
                     Circle()
                         .trim(from: 0, to: progress)
                         .stroke(
-                            isCompleted ? Color.green : Color.accentColor,
+                            isCompleted ? Color.positiveFgPrimary : Color.accentFgPrimary,
                             style: StrokeStyle(lineWidth: 6, lineCap: .round)
                         )
                         .frame(width: 100, height: 100)
@@ -175,8 +176,8 @@ private struct LongPressSection: View {
 
                     // Center icon
                     Image(systemName: isCompleted ? "checkmark" : "hand.tap.fill")
-                        .font(.title)
-                        .foregroundStyle(isCompleted ? .green : .accentColor)
+                        .font(PPFont.headline)
+                        .foregroundStyle(isCompleted ? Color.positiveFgPrimary : Color.accentFgPrimary)
                         .contentTransition(.symbolEffect(.replace))
                 }
                 .frame(width: 100, height: 100)
@@ -214,7 +215,7 @@ private struct LongPressSection: View {
             }
         }
         .padding(Spacing.md)
-        .background(Color(.tertiarySystemBackground))
+        .background(Color.bgSoft)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.lg, style: .continuous))
     }
 
@@ -271,7 +272,7 @@ private struct DragSection: View {
 
             ZStack {
                 RoundedRectangle(cornerRadius: CornerRadius.lg, style: .continuous)
-                    .fill(Color(.secondarySystemBackground))
+                    .fill(Color.bgRaised)
                     .frame(height: 220)
 
                 // Origin indicator
@@ -281,7 +282,7 @@ private struct DragSection: View {
 
                 // Draggable square
                 RoundedRectangle(cornerRadius: CornerRadius.md, style: .continuous)
-                    .fill(Color.accentColor.gradient)
+                    .fill(Color.accentFgPrimary.gradient)
                     .frame(width: 64, height: 64)
                     .shadowMedium()
                     .scaleEffect(isDragging ? 1.08 : 1.0)
@@ -314,13 +315,13 @@ private struct DragSection: View {
             HStack {
                 Spacer()
                 Text("x: \(String(format: "%.0f", dragOffset.width))  y: \(String(format: "%.0f", dragOffset.height))")
-                    .font(.caption.monospacedDigit())
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
                 Spacer()
             }
         }
         .padding(Spacing.md)
-        .background(Color(.tertiarySystemBackground))
+        .background(Color.bgSoft)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.lg, style: .continuous))
     }
 }

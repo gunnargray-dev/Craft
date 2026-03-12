@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SpacingRulerView: View {
     private let tokens: [(name: String, value: CGFloat)] = [
+        ("xxxs", Spacing.xxxs),
         ("xxs", Spacing.xxs),
         ("xs", Spacing.xs),
         ("sm", Spacing.sm),
@@ -9,6 +10,7 @@ struct SpacingRulerView: View {
         ("lg", Spacing.lg),
         ("xl", Spacing.xl),
         ("xxl", Spacing.xxl),
+        ("xxxl", Spacing.xxxl),
     ]
 
     var body: some View {
@@ -30,14 +32,15 @@ struct SpacingRulerView: View {
                 // MARK: - Example Usage Section
                 Text("Example Usage")
                     .sectionHeader()
-                    .enterAnimation(delay: 0.45)
+                    .enterAnimation(delay: 0.55)
 
                 exampleCard
                     .padding(.horizontal, Spacing.systemMargin)
-                    .enterAnimation(delay: 0.5)
+                    .enterAnimation(delay: 0.6)
             }
             .padding(.bottom, Spacing.xl)
         }
+        .background(Color.bgBase)
         .navigationTitle("Spacing")
     }
 
@@ -48,18 +51,18 @@ struct SpacingRulerView: View {
             // Name + value label
             HStack(spacing: Spacing.xxs) {
                 Text(name)
-                    .font(.subheadline)
+                    .font(PPFont.bodyMd)
                     .fontWeight(.medium)
-                    .frame(width: 36, alignment: .leading)
+                    .frame(width: 40, alignment: .leading)
                 Text("\(Int(value))pt")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
                     .frame(width: 32, alignment: .trailing)
             }
 
             // Colored bar
             RoundedRectangle(cornerRadius: CornerRadius.sm / 2)
-                .fill(.blue.gradient)
+                .fill(Color.accentFgPrimary.gradient)
                 .frame(width: value * 3, height: 24)
 
             Spacer()
@@ -74,10 +77,10 @@ struct SpacingRulerView: View {
             // Header group — tight spacing
             VStack(alignment: .leading, spacing: Spacing.xxs) {
                 Text("Card Title")
-                    .font(.headline)
+                    .font(PPFont.section)
                 Text("Subtitle text")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.bodyMd)
+                    .foregroundStyle(Color.fgSecondary)
             }
 
             // Gap between groups
@@ -86,8 +89,8 @@ struct SpacingRulerView: View {
 
             // Body group
             Text("Related items are grouped with small spacing (xxs, xs). Separate groups use larger spacing (md, lg) for visual hierarchy.")
-                .font(.body)
-                .foregroundStyle(.secondary)
+                .font(PPFont.bodyLg)
+                .foregroundStyle(Color.fgSecondary)
 
             Spacer()
                 .frame(height: Spacing.lg)
@@ -102,7 +105,7 @@ struct SpacingRulerView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: CornerRadius.md)
-                .fill(Color(.secondarySystemBackground))
+                .fill(Color.bgRaised)
         )
         .shadowSmall()
         .overlay(alignment: .topTrailing) {
@@ -112,13 +115,13 @@ struct SpacingRulerView: View {
 
     private func exampleButton(title: String) -> some View {
         Text(title)
-            .font(.subheadline)
+            .font(PPFont.bodyMd)
             .fontWeight(.medium)
             .padding(.horizontal, Spacing.md)
             .padding(.vertical, Spacing.xs)
             .background(
                 RoundedRectangle(cornerRadius: CornerRadius.sm)
-                    .fill(.blue.opacity(0.12))
+                    .fill(Color.accentFgPrimary.opacity(0.12))
             )
     }
 
@@ -128,20 +131,20 @@ struct SpacingRulerView: View {
         VStack(alignment: .trailing, spacing: Spacing.xxs) {
             annotationLabel("xxs (4pt) within group")
             annotationLabel("md (16pt) between groups")
-            annotationLabel("lg (24pt) before actions")
+            annotationLabel("lg (20pt) before actions")
         }
         .padding(Spacing.xs)
     }
 
     private func annotationLabel(_ text: String) -> some View {
         Text(text)
-            .font(.system(size: 9, weight: .medium, design: .monospaced))
-            .foregroundStyle(.secondary)
+            .font(PPFont.codeSm)
+            .foregroundStyle(Color.fgSecondary)
             .padding(.horizontal, Spacing.xxs)
             .padding(.vertical, 2)
             .background(
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color(.tertiarySystemBackground))
+                RoundedRectangle(cornerRadius: CornerRadius.sm)
+                    .fill(Color.bgSoft)
             )
     }
 }

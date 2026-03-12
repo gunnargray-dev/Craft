@@ -59,8 +59,8 @@ struct SheetDemoView: View {
 
                 VStack(alignment: .leading, spacing: Spacing.sm) {
                     Text("A sheet that supports all three detent sizes. Drag to resize between them.")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .font(PPFont.bodyMd)
+                        .foregroundStyle(Color.fgSecondary)
 
                     CraftButton(
                         title: "Present Multi-Detent Sheet",
@@ -107,6 +107,7 @@ struct SheetDemoView: View {
                 Spacer(minLength: Spacing.xxl)
             }
         }
+        .background(Color.bgBase)
         .navigationTitle("Sheets")
         .sheet(item: $presentedSheet) { size in
             singleDetentSheetContent(size: size)
@@ -125,28 +126,28 @@ struct SheetDemoView: View {
     private func sheetButton(size: SheetSize) -> some View {
         HStack(spacing: Spacing.sm) {
             Image(systemName: size.icon)
-                .font(.title2)
-                .foregroundStyle(Color.accentColor)
+                .font(PPFont.title)
+                .foregroundStyle(Color.accentFgPrimary)
                 .frame(width: 44, height: 44)
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(size.rawValue)
-                    .font(.headline)
+                    .font(PPFont.section)
                 Text(size.description)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
                     .lineLimit(2)
             }
 
             Spacer()
 
             Image(systemName: "chevron.right")
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(.tertiary)
+                .font(PPFont.caption)
+                .foregroundStyle(Color.fgTertiary)
         }
         .padding(Spacing.md)
         .frame(minHeight: 44)
-        .background(Color(.secondarySystemGroupedBackground))
+        .background(Color.bgRaised)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.lg, style: .continuous))
         .shadowSmall()
         .pressEffect {
@@ -163,16 +164,16 @@ struct SheetDemoView: View {
 
             Image(systemName: size.icon)
                 .font(.system(size: 48))
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color.accentFgPrimary)
                 .enterAnimation(delay: 0.1)
 
             VStack(spacing: Spacing.xs) {
                 Text("\(size.rawValue) Sheet")
-                    .font(.title2.weight(.semibold))
+                    .font(PPFont.title)
 
                 Text(size.description)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.bodyMd)
+                    .foregroundStyle(Color.fgSecondary)
                     .multilineTextAlignment(.center)
             }
             .enterAnimation(delay: 0.15)
@@ -195,16 +196,16 @@ struct SheetDemoView: View {
 
             Image(systemName: "arrow.up.and.down.text.horizontal")
                 .font(.system(size: 48))
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color.accentFgPrimary)
                 .enterAnimation(delay: 0.1)
 
             VStack(spacing: Spacing.xs) {
                 Text("Multi-Detent Sheet")
-                    .font(.title2.weight(.semibold))
+                    .font(PPFont.title)
 
                 Text("Drag the sheet to resize between small, medium, and large. The grabber handle at the top indicates this sheet is resizable.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.bodyMd)
+                    .foregroundStyle(Color.fgSecondary)
                     .multilineTextAlignment(.center)
             }
             .enterAnimation(delay: 0.15)
@@ -213,15 +214,15 @@ struct SheetDemoView: View {
                 ForEach(SheetSize.allCases) { size in
                     HStack(spacing: Spacing.sm) {
                         Image(systemName: size.icon)
-                            .foregroundStyle(Color.accentColor)
+                            .foregroundStyle(Color.accentFgPrimary)
                             .frame(width: 24)
                         Text(size.rawValue)
-                            .font(.body)
+                            .font(PPFont.bodyLg)
                         Spacer()
                     }
                     .padding(.horizontal, Spacing.md)
                     .padding(.vertical, Spacing.sm)
-                    .background(Color(.tertiarySystemFill))
+                    .background(Color.bgSoft)
                     .clipShape(RoundedRectangle(cornerRadius: CornerRadius.sm, style: .continuous))
                 }
             }
@@ -242,28 +243,28 @@ struct SheetDemoView: View {
     private func detentInfoRow(title: String, description: String, height: CGFloat) -> some View {
         HStack(spacing: Spacing.sm) {
             RoundedRectangle(cornerRadius: CornerRadius.sm, style: .continuous)
-                .fill(Color.accentColor.opacity(0.12))
+                .fill(Color.accentBgSubtle)
                 .frame(width: 60, height: height)
                 .overlay(
                     RoundedRectangle(cornerRadius: CornerRadius.sm - 2, style: .continuous)
-                        .fill(Color.accentColor.opacity(0.25))
+                        .fill(Color.accentFgPrimary.opacity(0.25))
                         .padding(4)
                         .frame(maxHeight: .infinity, alignment: .bottom)
                 )
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(.subheadline.weight(.semibold))
+                    .font(PPFont.bodyMdStrong)
                     .fontDesign(.monospaced)
                 Text(description)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
             }
 
             Spacer()
         }
         .padding(Spacing.sm)
-        .background(Color(.secondarySystemGroupedBackground))
+        .background(Color.bgRaised)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.md, style: .continuous))
     }
 }

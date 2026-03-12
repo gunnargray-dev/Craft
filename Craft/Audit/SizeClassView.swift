@@ -11,17 +11,17 @@ struct SizeClassView: View {
         ScrollView {
             VStack(spacing: Spacing.lg) {
                 Text("These values update live as you rotate the device or change multitasking layout.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.bodyMd)
+                    .foregroundStyle(Color.fgSecondary)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .enterAnimation(delay: 0.0)
 
                 // Size Classes
                 VStack(spacing: Spacing.sm) {
                     Text("Size Classes")
-                        .font(.caption)
+                        .font(PPFont.caption)
                         .fontWeight(.semibold)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color.fgSecondary)
                         .textCase(.uppercase)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -44,9 +44,9 @@ struct SizeClassView: View {
                 // Current Traits
                 VStack(spacing: Spacing.sm) {
                     Text("Current Traits")
-                        .font(.caption)
+                        .font(PPFont.caption)
                         .fontWeight(.semibold)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color.fgSecondary)
                         .textCase(.uppercase)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
@@ -70,7 +70,7 @@ struct SizeClassView: View {
                             showDivider: false
                         )
                     }
-                    .background(.background, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
+                    .background(Color.bgRaised, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
                     .shadowSmall()
                 }
                 .enterAnimation(delay: 0.1)
@@ -78,24 +78,24 @@ struct SizeClassView: View {
                 // Layout Summary
                 VStack(spacing: Spacing.sm) {
                     Text("Layout Guidance")
-                        .font(.caption)
+                        .font(PPFont.caption)
                         .fontWeight(.semibold)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(Color.fgSecondary)
                         .textCase(.uppercase)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     VStack(alignment: .leading, spacing: Spacing.sm) {
                         Label {
                             Text(layoutGuidance)
-                                .font(.body)
+                                .font(PPFont.bodyLg)
                         } icon: {
                             Image(systemName: "lightbulb.fill")
-                                .foregroundStyle(.yellow)
+                                .foregroundStyle(Color.yellow600)
                         }
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(Spacing.md)
-                    .background(.background, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
+                    .background(Color.bgRaised, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
                     .shadowSmall()
                 }
                 .enterAnimation(delay: 0.15)
@@ -104,6 +104,7 @@ struct SizeClassView: View {
             .padding(.top, Spacing.sm)
             .padding(.bottom, Spacing.xxl)
         }
+        .background(Color.bgBase)
         .navigationTitle("Size Class")
         .navigationBarTitleDisplayMode(.inline)
         .animation(Springs.responsive, value: horizontalSizeClass)
@@ -133,24 +134,24 @@ private struct SizeClassCard: View {
     var body: some View {
         VStack(spacing: Spacing.sm) {
             Image(systemName: icon)
-                .font(.title2)
+                .font(PPFont.title)
                 .foregroundStyle(.tint)
                 .frame(width: 44, height: 44)
                 .background(.tint.opacity(0.12), in: RoundedRectangle(cornerRadius: CornerRadius.sm))
 
             Text(axis)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+                .font(PPFont.caption)
+                .foregroundStyle(Color.fgSecondary)
 
             Text(value)
-                .font(.title2)
+                .font(PPFont.title)
                 .fontWeight(.bold)
-                .foregroundStyle(.primary)
+                .foregroundStyle(Color.fgPrimary)
                 .contentTransition(.numericText())
         }
         .frame(maxWidth: .infinity)
         .padding(Spacing.lg)
-        .background(.background, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
+        .background(Color.bgRaised, in: RoundedRectangle(cornerRadius: CornerRadius.lg))
         .shadowMedium()
     }
 }
@@ -167,20 +168,20 @@ private struct TraitRow: View {
         VStack(spacing: 0) {
             HStack(spacing: Spacing.sm) {
                 Image(systemName: icon)
-                    .font(.body)
+                    .font(PPFont.bodyLg)
                     .foregroundStyle(.tint)
                     .frame(width: 28)
 
                 Text(label)
-                    .font(.body)
-                    .foregroundStyle(.primary)
+                    .font(PPFont.bodyLg)
+                    .foregroundStyle(Color.fgPrimary)
 
                 Spacer(minLength: 0)
 
                 Text(value)
-                    .font(.body)
+                    .font(PPFont.bodyLg)
                     .fontWeight(.medium)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.fgSecondary)
             }
             .frame(minHeight: 44)
             .padding(.horizontal, Spacing.md)

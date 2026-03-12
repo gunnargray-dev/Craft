@@ -12,6 +12,7 @@ struct ComponentsListView: View {
                     }
                     .enterAnimation(delay: 0.0)
                 }
+                .listRowBackground(Color.bgRaised)
 
                 Section("Text Inputs") {
                     NavigationLink {
@@ -21,6 +22,7 @@ struct ComponentsListView: View {
                     }
                     .enterAnimation(delay: 0.05)
                 }
+                .listRowBackground(Color.bgRaised)
 
                 Section("Cards") {
                     NavigationLink {
@@ -30,6 +32,7 @@ struct ComponentsListView: View {
                     }
                     .enterAnimation(delay: 0.1)
                 }
+                .listRowBackground(Color.bgRaised)
 
                 Section("Lists") {
                     NavigationLink {
@@ -39,6 +42,7 @@ struct ComponentsListView: View {
                     }
                     .enterAnimation(delay: 0.15)
                 }
+                .listRowBackground(Color.bgRaised)
 
                 Section("Sheets") {
                     NavigationLink {
@@ -48,6 +52,7 @@ struct ComponentsListView: View {
                     }
                     .enterAnimation(delay: 0.2)
                 }
+                .listRowBackground(Color.bgRaised)
 
                 Section("Empty States") {
                     NavigationLink {
@@ -57,7 +62,10 @@ struct ComponentsListView: View {
                     }
                     .enterAnimation(delay: 0.25)
                 }
+                .listRowBackground(Color.bgRaised)
             }
+            .scrollContentBackground(.hidden)
+            .background(Color.bgBase)
             .navigationTitle("Components")
         }
     }

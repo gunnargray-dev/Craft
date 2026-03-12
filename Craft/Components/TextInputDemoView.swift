@@ -11,11 +11,11 @@ enum TextFieldState: String, CaseIterable, Identifiable {
 
     var borderColor: Color {
         switch self {
-        case .default: Color(.separator)
-        case .focused: .accentColor
-        case .filled: Color(.separator)
-        case .error: .red
-        case .disabled: Color(.separator).opacity(0.5)
+        case .default: Color.borderBase
+        case .focused: .accentFgPrimary
+        case .filled: Color.borderBase
+        case .error: .negativeFgPrimary
+        case .disabled: Color.borderBase.opacity(0.5)
         }
     }
 
@@ -28,8 +28,8 @@ enum TextFieldState: String, CaseIterable, Identifiable {
 
     var backgroundColor: Color {
         switch self {
-        case .disabled: Color(.tertiarySystemFill)
-        default: Color(.secondarySystemGroupedBackground)
+        case .disabled: Color.bgSoft
+        default: Color.bgRaised
         }
     }
 
@@ -45,8 +45,8 @@ enum TextFieldState: String, CaseIterable, Identifiable {
 
     var helperColor: Color {
         switch self {
-        case .error: .red
-        default: .secondary
+        case .error: .negativeFgPrimary
+        default: Color.fgSecondary
         }
     }
 
@@ -91,8 +91,8 @@ struct TextInputDemoView: View {
 
                 VStack(alignment: .leading, spacing: Spacing.xs) {
                     Text("Email Address")
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(selectedState == .disabled ? .tertiary : .primary)
+                        .font(PPFont.bodyMdStrong)
+                        .foregroundStyle(selectedState == .disabled ? Color.fgTertiary : Color.fgPrimary)
 
                     HStack(spacing: Spacing.sm) {
                         Image(systemName: "envelope")
@@ -112,7 +112,7 @@ struct TextInputDemoView: View {
 
                         if selectedState == .filled || selectedState == .error {
                             Image(systemName: selectedState == .filled ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
-                                .foregroundStyle(selectedState == .filled ? .green : .red)
+                                .foregroundStyle(selectedState == .filled ? Color.positiveFgPrimary : Color.negativeFgPrimary)
                                 .transition(.scale.combined(with: .opacity))
                         }
                     }
@@ -131,10 +131,10 @@ struct TextInputDemoView: View {
                         HStack(spacing: Spacing.xxs) {
                             if selectedState == .error {
                                 Image(systemName: "exclamationmark.triangle.fill")
-                                    .font(.caption2)
+                                    .font(PPFont.caption)
                             }
                             Text(helper)
-                                .font(.caption)
+                                .font(PPFont.caption)
                         }
                         .foregroundStyle(selectedState.helperColor)
                         .transition(.move(edge: .top).combined(with: .opacity))
@@ -164,23 +164,23 @@ struct TextInputDemoView: View {
 
                 VStack(alignment: .leading, spacing: Spacing.xs) {
                     Text("Description")
-                        .font(.subheadline.weight(.semibold))
+                        .font(PPFont.bodyMdStrong)
 
                     TextEditor(text: .constant("This is a multi-line text editor that grows with content. It uses the same styling tokens for consistency."))
-                        .font(.body)
+                        .font(PPFont.bodyLg)
                         .frame(minHeight: 100)
                         .scrollContentBackground(.hidden)
                         .padding(Spacing.sm)
-                        .background(Color(.secondarySystemGroupedBackground))
+                        .background(Color.bgRaised)
                         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.md, style: .continuous))
                         .overlay(
                             RoundedRectangle(cornerRadius: CornerRadius.md, style: .continuous)
-                                .strokeBorder(Color(.separator), lineWidth: 1)
+                                .strokeBorder(Color.borderBase, lineWidth: 1)
                         )
 
                     Text("0 / 500 characters")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(PPFont.caption)
+                        .foregroundStyle(Color.fgSecondary)
                 }
                 .padding(.horizontal, Spacing.systemMargin)
                 .enterAnimation(delay: 0.7)
@@ -188,6 +188,7 @@ struct TextInputDemoView: View {
                 Spacer(minLength: Spacing.xxl)
             }
         }
+        .background(Color.bgBase)
         .navigationTitle("Text Inputs")
         .onChange(of: selectedState) {
             switch selectedState {
@@ -228,10 +229,10 @@ struct TextInputDemoView: View {
 
     private var iconColor: Color {
         switch selectedState {
-        case .focused: .accentColor
-        case .error: .red
-        case .disabled: Color(UIColor.tertiaryLabel)
-        default: .secondary
+        case .focused: .accentFgPrimary
+        case .error: .negativeFgPrimary
+        case .disabled: Color.fgTertiary
+        default: Color.fgSecondary
         }
     }
 
@@ -240,33 +241,33 @@ struct TextInputDemoView: View {
         VStack(alignment: .leading, spacing: Spacing.xxs) {
             HStack(spacing: Spacing.xs) {
                 Image(systemName: state.sfSymbol)
-                    .foregroundStyle(state == .error ? .red : state == .filled ? .green : .secondary)
+                    .foregroundStyle(state == .error ? Color.negativeFgPrimary : state == .filled ? Color.positiveFgPrimary : Color.fgSecondary)
                 Text(state.rawValue)
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
             }
 
             HStack(spacing: Spacing.sm) {
                 Image(systemName: "envelope")
-                    .foregroundStyle(state == .disabled ? .tertiary : .secondary)
+                    .foregroundStyle(state == .disabled ? Color.fgTertiary : Color.fgSecondary)
                     .frame(width: 20)
 
                 Text(state == .filled ? "user@example.com" : state == .error ? "invalid" : "you@example.com")
-                    .font(.body)
+                    .font(PPFont.bodyLg)
                     .foregroundStyle(
-                        state == .disabled ? .tertiary :
-                        (state == .default ? .tertiary : .primary)
+                        state == .disabled ? Color.fgTertiary :
+                        (state == .default ? Color.fgTertiary : Color.fgPrimary)
                     )
 
                 Spacer()
 
                 if state == .filled {
                     Image(systemName: "checkmark.circle.fill")
-                        .foregroundStyle(.green)
+                        .foregroundStyle(Color.positiveFgPrimary)
                 }
                 if state == .error {
                     Image(systemName: "exclamationmark.circle.fill")
-                        .foregroundStyle(.red)
+                        .foregroundStyle(Color.negativeFgPrimary)
                 }
             }
             .padding(.horizontal, Spacing.md)

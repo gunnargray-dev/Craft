@@ -49,6 +49,7 @@ struct SpringPlaygroundView: View {
             .padding(.horizontal, Spacing.systemMargin)
             .padding(.vertical, Spacing.md)
         }
+        .background(Color.bgBase)
         .navigationTitle("Spring Playground")
     }
 
@@ -68,12 +69,12 @@ struct SpringPlaygroundView: View {
     private func presetButton(for preset: SpringPreset) -> some View {
         let isSelected = selectedPreset == preset.name
         return Text(preset.name)
-            .font(.subheadline.weight(.semibold))
-            .foregroundStyle(isSelected ? .white : .primary)
+            .font(PPFont.bodyMdStrong)
+            .foregroundStyle(isSelected ? Color.fgInverse : Color.fgPrimary)
             .padding(.horizontal, Spacing.md)
             .padding(.vertical, Spacing.sm)
             .frame(minHeight: 44)
-            .background(isSelected ? Color.accentColor : Color(.tertiarySystemFill))
+            .background(isSelected ? Color.accentBgBase : Color.bgSoft)
             .clipShape(RoundedRectangle(cornerRadius: CornerRadius.sm, style: .continuous))
             .contentShape(RoundedRectangle(cornerRadius: CornerRadius.sm, style: .continuous))
             .pressEffect {
@@ -91,7 +92,7 @@ struct SpringPlaygroundView: View {
     private var dragArea: some View {
         ZStack {
             RoundedRectangle(cornerRadius: CornerRadius.lg, style: .continuous)
-                .fill(Color(.secondarySystemBackground))
+                .fill(Color.bgRaised)
                 .frame(height: 280)
 
             // Origin crosshair
@@ -101,7 +102,7 @@ struct SpringPlaygroundView: View {
 
             // Draggable circle
             Circle()
-                .fill(Color.accentColor)
+                .fill(Color.accentFgPrimary)
                 .frame(width: 72, height: 72)
                 .shadowMedium()
                 .offset(circleOffset)
@@ -131,23 +132,23 @@ struct SpringPlaygroundView: View {
         HStack(spacing: Spacing.lg) {
             VStack(spacing: Spacing.xxs) {
                 Text("Response")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
                 Text(String(format: "%.2f", response))
                     .font(.title2.weight(.semibold).monospacedDigit())
             }
 
             VStack(spacing: Spacing.xxs) {
                 Text("Damping")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .font(PPFont.caption)
+                    .foregroundStyle(Color.fgSecondary)
                 Text(String(format: "%.2f", damping))
                     .font(.title2.weight(.semibold).monospacedDigit())
             }
         }
         .padding(Spacing.md)
         .frame(maxWidth: .infinity)
-        .background(Color(.secondarySystemBackground))
+        .background(Color.bgRaised)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.md, style: .continuous))
     }
 
@@ -157,11 +158,11 @@ struct SpringPlaygroundView: View {
         VStack(spacing: Spacing.lg) {
             VStack(alignment: .leading, spacing: Spacing.xs) {
                 Text("Response")
-                    .font(.subheadline.weight(.semibold))
+                    .font(PPFont.bodyMdStrong)
                 HStack(spacing: Spacing.sm) {
                     Text("0.1")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(PPFont.caption)
+                        .foregroundStyle(Color.fgSecondary)
                     Slider(value: $response, in: 0.1...1.0, step: 0.01) {
                         Text("Response")
                     }
@@ -169,18 +170,18 @@ struct SpringPlaygroundView: View {
                         selectedPreset = "Custom"
                     }
                     Text("1.0")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(PPFont.caption)
+                        .foregroundStyle(Color.fgSecondary)
                 }
             }
 
             VStack(alignment: .leading, spacing: Spacing.xs) {
                 Text("Damping Fraction")
-                    .font(.subheadline.weight(.semibold))
+                    .font(PPFont.bodyMdStrong)
                 HStack(spacing: Spacing.sm) {
                     Text("0.1")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(PPFont.caption)
+                        .foregroundStyle(Color.fgSecondary)
                     Slider(value: $damping, in: 0.1...1.0, step: 0.01) {
                         Text("Damping")
                     }
@@ -188,13 +189,13 @@ struct SpringPlaygroundView: View {
                         selectedPreset = "Custom"
                     }
                     Text("1.0")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .font(PPFont.caption)
+                        .foregroundStyle(Color.fgSecondary)
                 }
             }
         }
         .padding(Spacing.md)
-        .background(Color(.secondarySystemBackground))
+        .background(Color.bgRaised)
         .clipShape(RoundedRectangle(cornerRadius: CornerRadius.md, style: .continuous))
     }
 }

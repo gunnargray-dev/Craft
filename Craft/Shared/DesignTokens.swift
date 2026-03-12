@@ -1,26 +1,30 @@
 import SwiftUI
 
-// MARK: - Spacing (4pt grid)
+// MARK: - Spacing (Perplexity scale)
 
 enum Spacing {
-    static let xxs: CGFloat = 4
-    static let xs: CGFloat = 8
-    static let sm: CGFloat = 12
-    static let md: CGFloat = 16
-    static let lg: CGFloat = 24
-    static let xl: CGFloat = 32
-    static let xxl: CGFloat = 48
+    static let xxxs: CGFloat = 2   // 3xs
+    static let xxs: CGFloat = 4    // 2xs
+    static let xs: CGFloat = 8     // xs
+    static let sm: CGFloat = 12    // sm
+    static let md: CGFloat = 16    // md
+    static let lg: CGFloat = 20    // lg
+    static let xl: CGFloat = 24    // xl
+    static let xxl: CGFloat = 28   // 2xl
+    static let xxxl: CGFloat = 32  // 3xl
 
     static let systemMargin: CGFloat = 16
 }
 
-// MARK: - Corner Radius
+// MARK: - Corner Radius (Perplexity scale)
 
 enum CornerRadius {
-    static let sm: CGFloat = 8
-    static let md: CGFloat = 12
-    static let lg: CGFloat = 16
-    static let xl: CGFloat = 20
+    static let xs: CGFloat = 2
+    static let sm: CGFloat = 4
+    static let md: CGFloat = 6
+    static let lg: CGFloat = 8
+    static let xl: CGFloat = 12
+    static let xxl: CGFloat = 16
     static let full: CGFloat = 999
 
     /// Concentric radius: outer = inner + padding
@@ -149,11 +153,11 @@ extension View {
 struct SectionHeaderStyle: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .font(.headline)
-            .foregroundStyle(.primary)
+            .font(PPFont.section)
+            .foregroundStyle(Color.fgPrimary)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, Spacing.systemMargin)
-            .padding(.top, Spacing.lg)
+            .padding(.top, Spacing.xl)
             .padding(.bottom, Spacing.xs)
     }
 }
