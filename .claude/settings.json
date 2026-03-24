@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Bash(xcodebuild*)",
+      "Bash(git*)",
+      "Bash(gh*)",
+      "Bash(find*)",
+      "Bash(grep*)",
+      "Bash(ls*)",
+      "Bash(cat*)",
+      "Bash(mkdir*)",
+      "Bash(rm*)",
+      "Bash(cp*)",
+      "Bash(mv*)"
+    ]
+  }
+}
