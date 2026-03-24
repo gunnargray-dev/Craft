@@ -1,59 +1,6 @@
-# Craft — iOS Design Library App
+# Craft — App Feature Spec
 
-A SwiftUI iOS app that serves as a living reference for native mobile design principles. Each screen demonstrates and validates specific design craft patterns.
-
-## Project Setup
-- **Platform:** iOS 18+, SwiftUI only
-- **Xcode project:** Create as a standard iOS app (no SwiftUI multiplatform)
-- **Bundle ID:** co.parallelstudio.craft
-- **Deployment target:** iOS 18.0
-- **No external dependencies.** Pure SwiftUI + system frameworks only.
-
-## Architecture
-- MVVM-light. Views + lightweight view models where state management is needed.
-- No over-engineering. This is a reference app, not a production app with networking.
-- Use @Observable (iOS 17+) over ObservableObject.
-- Group files by feature/tab, not by type.
-
-## Design Standards — CRITICAL
-
-This app IS the design skills validation. Every component must follow these rules:
-
-### Motion
-- Use springs, never linear/ease-in-out for interactive elements
-- Snappy spring (response: 0.3, damping: 0.7) for button press, toggles
-- Responsive spring (response: 0.4, damping: 0.75) for sheet presentation
-- Smooth spring (response: 0.5, damping: 0.8) for navigation transitions
-- Enter animations: opacity + translateY + blur
-- Exit animations: quieter than enters (-12pt offset, faster)
-- Respect Reduce Motion: use .animation(.default, value:) and check accessibilityReduceMotion
-
-### Components
-- Concentric border radius: outer = inner + padding. ALWAYS.
-- Press states on all tappable elements: scale(0.97) with snappy spring
-- Three-tier shadow system (use transparent shadows, not solid borders)
-- Minimum 44pt touch targets (extend hit area with contentShape)
-- Loading skeletons match exact layout of loaded state
-
-### Typography
-- Use system text styles (title, headline, body, caption, etc.)
-- Maximum 2 weights per view
-- Support Dynamic Type — test at AX5
-
-### Color
-- Use system semantic colors (label, secondaryLabel, systemBackground, etc.)
-- Support both light and dark mode
-- Never rely on color alone for state — add icons/shapes
-
-### Spacing
-- 4pt grid: use multiples of 4 for all spacing
-- System margins: 16pt leading/trailing on iPhone
-- Group related items with proximity, separate groups with larger gaps
-
-### Navigation
-- Bottom tab bar with 4 tabs (SF Symbols, filled for selected)
-- Navigation stack within each tab
-- Sheets with grabber handles and proper detents
+> Coding conventions, architecture, and build commands are in `CLAUDE.md`. This file contains the detailed feature spec and build priority.
 
 ## Tab Structure
 
@@ -94,52 +41,11 @@ Sections:
 - **Size Class** — display current horizontal/vertical size class, update live on rotation
 - **Checklist** — interactive version of accessibility audit (toggleable checkmarks)
 
-## File Structure
-```
-Craft/
-├── CraftApp.swift
-├── ContentView.swift (tab bar)
-├── Components/
-│   ├── ComponentsListView.swift
-│   ├── ButtonGalleryView.swift
-│   ├── TextInputDemoView.swift
-│   ├── CardGalleryView.swift
-│   ├── ListDemoView.swift
-│   ├── SheetDemoView.swift
-│   └── EmptyStateDemoView.swift
-├── Foundation/
-│   ├── FoundationListView.swift
-│   ├── TypeScaleView.swift
-│   ├── TypeHierarchyView.swift
-│   ├── ColorPaletteView.swift
-│   ├── SpacingRulerView.swift
-│   └── BorderRadiusView.swift
-├── Motion/
-│   ├── MotionListView.swift
-│   ├── SpringPlaygroundView.swift
-│   ├── EnterExitDemoView.swift
-│   ├── StaggerDemoView.swift
-│   ├── SharedElementView.swift
-│   ├── HapticsDemoView.swift
-│   └── GestureDemoView.swift
-├── Audit/
-│   ├── AuditListView.swift
-│   ├── DynamicTypePreviewView.swift
-│   ├── ContrastCheckerView.swift
-│   ├── SizeClassView.swift
-│   └── ChecklistView.swift
-└── Shared/
-    ├── DesignTokens.swift (spacing scale, shadow definitions, spring configs)
-    └── CraftButton.swift (reusable button component following the spec)
-```
+## Build Priority
 
-## Priority
 Build in this order:
 1. App shell (tabs, navigation, DesignTokens.swift)
 2. Components tab (most visual validation)
 3. Foundation tab
 4. Motion tab
 5. Audit tab
-
-When completely finished, run this command to notify:
-openclaw system event --text "Done: Craft iOS library app built — all 4 tabs with design skill validation" --mode now
